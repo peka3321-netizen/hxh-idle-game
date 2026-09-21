@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>獵人編年史：小傑篇 v0.2.0</title>
+<title>獵人編年史：小傑篇 v0.3.0</title>
 <meta name="description" content="非官方 HUNTER×HUNTER 同人放置遊戲初始版，以小傑的故事時間線為主。" />
 <style>
 :root{
@@ -23,6 +23,87 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
 @media(max-width:760px){.status-strip{grid-template-columns:1fr 1fr}.current-activity{padding:10px}.activity-summary{grid-template-columns:1fr}.offline-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.status-strip{grid-template-columns:1fr 1fr}.status-pill{padding:8px}.status-pill b{font-size:11px}.current-activity-head{align-items:center}.current-activity-name{font-size:15px}}
 
+
+
+/* v0.3 panel polish */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 10%,#d1ff7a12 0,transparent 28%),radial-gradient(circle at 82% 14%,#7dd6ff0f 0,transparent 22%),linear-gradient(180deg,transparent 0,#00000012 100%)}
+.app{padding:22px 18px 26px}
+.topbar{padding:16px 18px;border:1px solid #2b5647;border-radius:22px;background:linear-gradient(180deg,#0e241df2,#0a1a16e8);box-shadow:0 14px 40px #0006;position:sticky;top:8px;z-index:5;backdrop-filter:blur(10px)}
+.brand h1{letter-spacing:.06em;text-shadow:0 2px 10px #0008}
+.brand small{font-size:12px;letter-spacing:.03em}
+.badge{background:radial-gradient(circle at 35% 35%,#1e4e3a 0,#0c1915 65%);border-color:#d3ef7a;color:#f2f4d8;box-shadow:0 0 0 4px #b8ef6f10,0 0 25px #b8ef6f26 inset}
+.btn{border-radius:14px;background:linear-gradient(180deg,#1b3a2e,#122920);font-weight:700}
+.btn.primary{background:linear-gradient(180deg,#4f8557,#2b5a3b)}
+.btn.gold{background:linear-gradient(180deg,#896c2d,#5c4a1f);color:#fff5d8}
+.btn.danger{background:linear-gradient(180deg,#653534,#4d2524)}
+.status-strip{gap:10px;margin:14px 0 16px}
+.status-pill{padding:11px 13px;background:linear-gradient(180deg,#10261edd,#0c1c17d9);box-shadow:inset 0 1px 0 #ffffff08,0 10px 24px #0003}
+.status-pill b{font-size:13px;color:#f4f8e9}
+.layout{grid-template-columns:340px minmax(420px,1fr) 340px;gap:16px}
+.card{background:linear-gradient(180deg,#12271fea,#0b1915d9);border:1px solid #355f4e;box-shadow:0 18px 45px #0007, inset 0 1px 0 #ffffff08}
+.card-head{background:linear-gradient(180deg,#11271fd8,#0b1815f2)}
+.card-body{padding:16px}
+.profile-hero{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:14px;border:1px solid #355f50;border-radius:18px;background:linear-gradient(135deg,#152f25,#0d1d18);margin-bottom:14px;position:relative;overflow:hidden}
+.profile-hero::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#d0ff7a18 0,transparent 70%)}
+.profile-avatar{position:relative;width:92px;height:92px;display:grid;place-items:center}
+.profile-avatar-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #d3ef7a;box-shadow:0 0 0 7px #d3ef7a12, 0 0 22px #d3ef7a22 inset}
+.profile-avatar-core{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;font-size:20px;font-weight:900;letter-spacing:.08em;color:#f7f4d4;background:radial-gradient(circle at 30% 30%,#35653f,#13231b 72%);border:1px solid #82bf6d}
+.profile-overline{font-size:11px;letter-spacing:.1em;color:#c2d7cc;text-transform:uppercase}
+.profile-name{font-size:22px;font-weight:900;color:#fff2c7;margin-top:2px}
+.profile-sub{font-size:12px;color:#b5cec2;line-height:1.5;margin-top:3px}
+.profile-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.profile-tag{border:1px solid #446f5d;background:#0a1a14;padding:5px 8px;border-radius:999px;font-size:11px;color:#dbebe3}
+.profile-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.profile-metrics>div{padding:9px 10px;border-radius:12px;background:#0b1915cc;border:1px solid #29493c}
+.profile-metrics small{display:block;color:#91ad9f;font-size:10px;margin-bottom:4px}
+.profile-metrics b{font-size:12px;color:#f3f6df;line-height:1.4}
+.statgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{padding:12px 12px 11px;border-radius:16px;background:linear-gradient(180deg,#0d1e18,#0a1613);box-shadow:inset 0 1px 0 #ffffff05}
+.stat b{font-size:20px;color:#faf6df}
+.stat span{font-size:11px;letter-spacing:.03em}
+.mini-title{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.03em;margin:15px 0 9px}
+.mini-title::before{content:"";width:18px;height:2px;border-radius:999px;background:linear-gradient(90deg,#b8ef6f,#74c6df)}
+.chip{background:linear-gradient(180deg,#142a22,#0c1714);border-color:#365c4c;padding:7px 10px;color:#e4efe8}
+.info-box,.offline-note,.quest,.current-activity,.activity,.codex-entry{box-shadow:inset 0 1px 0 #ffffff05}
+.current-activity{padding:14px;border-radius:18px;background:linear-gradient(135deg,#12271f,#112d22);border-color:#66866f;box-shadow:0 14px 28px #0000002e,inset 0 0 30px #b8ef6f08}
+.current-activity-name{font-size:18px;letter-spacing:.02em}
+.current-activity-time{font-size:22px;text-shadow:0 0 12px #b8ef6f33}
+.activity-summary>div,.offline-grid>div{background:linear-gradient(180deg,#0b1915,#0a1612)}
+.activity{padding:12px;border-radius:16px;background:linear-gradient(180deg,#0d1e18,#0a1713);transition:.18s ease}
+.activity:hover{transform:translateY(-1px);border-color:#4a7963}
+.activity.active{background:linear-gradient(180deg,#132b20,#0c1d16)}
+.scene{min-height:360px;background:#050b0a;border-bottom:1px solid #315245}
+.scene::after{content:"";position:absolute;inset:auto 0 0 0;height:80px;background:linear-gradient(180deg,transparent,#08110e)}
+.scene svg{min-height:360px}
+.scene-info{bottom:18px}
+.scene-title{background:linear-gradient(180deg,#07120ef2,#081612d8);border-radius:16px;padding:12px 14px}
+.scene-title b{font-size:22px;color:#fff3cd}
+.timeline-tag{padding:9px 12px;font-weight:700;box-shadow:0 6px 18px #0005}
+.story{padding:18px}
+.objective-banner{display:flex;justify-content:space-between;gap:12px;padding:14px 15px;border-radius:16px;margin-bottom:12px;background:linear-gradient(135deg,#172f24,#10241d);border:1px solid #396351;align-items:stretch}
+.objective-main,.objective-side{display:flex;flex-direction:column}
+.objective-main span,.objective-side span{font-size:11px;color:#9eb9ab;letter-spacing:.06em}
+.objective-main b{font-size:18px;color:#fff0c0;margin:3px 0}
+.objective-main small{color:#c2d5cc;line-height:1.55}
+.objective-side{min-width:160px;padding:10px 12px;border-radius:14px;background:#0a1713;border:1px solid #29493d;justify-content:center}
+.objective-side b{margin-top:4px;color:#c8ef86;font-size:15px}
+.dialogue{padding:17px 16px;border-radius:18px;min-height:125px;box-shadow:0 20px 30px #00000018,inset 0 0 0 3px #ffffff30}
+.speaker{font-size:14px;letter-spacing:.06em}
+.tabs{padding:10px;background:#0b1613;gap:8px}
+.tab{padding:10px 12px;border-radius:12px;font-weight:800;letter-spacing:.02em}
+.tab.active{background:linear-gradient(180deg,#244839,#16362b);box-shadow:inset 0 1px 0 #ffffff0c}
+.tab-pane{min-height:280px}
+.item{padding:12px 0}
+.icon{background:linear-gradient(180deg,#1a3b2f,#10231c);border-radius:12px}
+.codex-entry{border-radius:14px;background:linear-gradient(180deg,#0e2019,#0a1713)}
+.log{max-height:370px}
+.log-row{padding:9px 0}
+.footer-note{padding:12px 14px;border:1px solid #28483b;border-radius:16px;background:#0a1714cc;margin-top:16px}
+.modal-box{background:linear-gradient(180deg,#12271f,#0b1714)}
+@media(max-width:1150px){.layout{grid-template-columns:320px 1fr}.rightcol{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px}.rightcol>.card{margin-top:0!important}}
+@media(max-width:760px){.topbar{position:static;padding:14px}.status-strip{grid-template-columns:1fr 1fr}.profile-hero{grid-template-columns:76px 1fr}.profile-avatar{width:76px;height:76px}.profile-avatar-core{width:62px;height:62px;font-size:16px}.profile-name{font-size:19px}.profile-metrics{grid-template-columns:1fr}.scene{min-height:280px}.scene svg{min-height:280px}.objective-banner{display:block}.objective-side{margin-top:10px;min-width:0}.layout{display:block}.rightcol{display:block}}
+@media(max-width:480px){.app{padding:10px}.status-strip{grid-template-columns:1fr}.top-actions{width:100%;justify-content:flex-start}.brand{align-items:flex-start}.profile-hero{grid-template-columns:1fr}.profile-avatar{margin:auto}.statgrid{grid-template-columns:1fr 1fr}.current-activity-time{font-size:18px}.scene-title b{font-size:18px}.objective-main b{font-size:16px}}
+
 </style>
 </head>
 <body>
@@ -30,7 +111,7 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
   <header class="topbar">
     <div class="brand">
       <div class="badge">H×H</div>
-      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.2.0「放置介面革新」</small></div>
+      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.3.0「面板美術優化」</small></div>
     </div>
     <div class="top-actions">
       <button class="btn" id="saveBtn">儲存</button>
@@ -41,9 +122,9 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
   </header>
 
   <div class="status-strip">
-    <div class="status-pill"><span>目前章節</span><b id="hudStage">鯨魚島</b></div>
-    <div class="status-pill"><span>遊玩時間</span><b id="playTimeText">0 分</b></div>
-    <div class="status-pill"><span>離線上限</span><b>72 小時</b></div>
+    <div class="status-pill"><span>📖 目前章節</span><b id="hudStage">鯨魚島</b></div>
+    <div class="status-pill"><span>⏱ 遊玩時間</span><b id="playTimeText">0 分</b></div>
+    <div class="status-pill"><span>🌙 離線上限</span><b>72 小時</b></div>
     <div class="status-pill"><span><i class="pulse-dot"></i>存檔</span><b>每 5 秒自動儲存</b></div>
   </div>
 
@@ -51,6 +132,26 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
     <section class="card leftcol">
       <div class="card-head"><h3>小傑・富力士</h3><span class="chip" id="stageChip">鯨魚島</span></div>
       <div class="card-body">
+        <div class="profile-hero">
+          <div class="profile-avatar">
+            <div class="profile-avatar-core">GON</div>
+            <div class="profile-avatar-ring"></div>
+          </div>
+          <div class="profile-copy">
+            <div class="profile-overline">主角角色面板</div>
+            <div class="profile-name">小傑・富力士</div>
+            <div class="profile-sub">鯨魚島出身｜目標：成為獵人，追上金的足跡</div>
+            <div class="profile-tags">
+              <span class="profile-tag">強化系傾向</span>
+              <span class="profile-tag">釣竿使用者</span>
+              <span class="profile-tag">初始篇章</span>
+            </div>
+            <div class="profile-metrics">
+              <div><small>距離下級</small><b id="nextLevelEta">估算中</b></div>
+              <div><small>目前主線</small><b id="mainQuestText">鯨魚島的約定</b></div>
+            </div>
+          </div>
+        </div>
         <div class="statgrid">
           <div class="stat"><b id="levelText">Lv.1</b><span>等級</span><div class="bar"><div class="fill" id="expBar"></div></div><div class="exp-detail" id="expDetail">0 / 35 EXP</div></div>
           <div class="stat"><b id="jennyText">0</b><span>戒尼</span></div>
@@ -91,6 +192,17 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
     <section class="card centercol">
       <div class="scene" id="sceneArt"></div>
       <div class="story">
+        <div class="objective-banner">
+          <div class="objective-main">
+            <span>目前目標</span>
+            <b id="objectiveTitle">準備挑戰沼澤之王</b>
+            <small id="objectiveDesc">先累積訓練與餌料，才能開始主線事件。</small>
+          </div>
+          <div class="objective-side">
+            <span>建議行動</span>
+            <b id="objectiveAction">持續修行</b>
+          </div>
+        </div>
         <div class="dialogue">
           <div class="speaker" id="speaker">旁白</div>
           <p id="dialogueText"></p>
@@ -104,9 +216,9 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
     <aside class="rightcol">
       <section class="card">
         <div class="tabs">
-          <button class="tab active" data-tab="bag">背包</button>
-          <button class="tab" data-tab="codex">人物誌</button>
-          <button class="tab" data-tab="timeline">時間線</button>
+          <button class="tab active" data-tab="bag">🎒 背包</button>
+          <button class="tab" data-tab="codex">👥 人物誌</button>
+          <button class="tab" data-tab="timeline">🕒 時間線</button>
         </div>
         <div class="card-body tab-pane active" id="tab-bag"><div id="inventory"></div></div>
         <div class="card-body tab-pane" id="tab-codex"><div id="codex"></div></div>
@@ -118,7 +230,7 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
       </section>
     </aside>
   </main>
-  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。v0.2 新增週期計時、每小時收益與離線報告。</div>
+  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。v0.3 針對面板視覺、資訊層級與行動導引進一步優化。</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -129,7 +241,7 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
 (() => {
 'use strict';
 const SAVE_KEY = 'hxh_gon_idle_v01';
-const VERSION = '0.2.0';
+const VERSION = '0.3.0';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const now=()=>Date.now();
 const fmt=n=>Math.floor(n).toLocaleString('zh-TW');
@@ -228,7 +340,7 @@ function storyAction(action){
  if(action==='storm')startStorm();
  if(action==='meet'&&S.flags.storm){S.flags.metFriends=true;S.stage=6;S.storyStep=6;unlock('kurapika');unlock('leorio');S.stats.bond+=1;addLog('你與雷歐力、酷拉皮卡互相認識。')}
  if(action==='captain'&&S.flags.metFriends){S.flags.captain=true;S.stage=7;S.storyStep=7;addLog('船長開始詢問三人的真正動機。')}
- if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.2 目前主線完成。');toast('目前主線完成！')}
+ if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.3 目前主線完成。');toast('目前主線完成！')}
  save();render();
 }
 
@@ -251,6 +363,18 @@ function rewardLabel(r){const parts=[];if(r.exp)parts.push(`EXP +${r.exp.toFixed
 function hourlyLabel(id){const a=activityDef(id),r=cycleRewards(id,3600/a.duration);return rewardLabel(r)}
 function offline72Label(id){const a=activityDef(id),r=cycleRewards(id,(72*3600/a.duration)*.55);if(r.exp)return `EXP +${Math.floor(r.exp).toLocaleString('zh-TW')}`;if(r.bait)return `餌料 +${Math.floor(r.bait)} / 草藥 +${Math.floor(r.herb)}`;if(r.fish)return `魚獲 +${Math.floor(r.fish)} / 戒尼 +${Math.floor(r.jenny)}`;return '—'}
 function activityRewardText(id){const a=activityDef(id),r=cycleRewards(id);return `${a.duration} 秒一輪｜${rewardLabel(r)}｜每小時：${hourlyLabel(id)}`}
+
+function currentObjective(){
+ if(!S.flags.master)return {title:'完成鯨魚島的約定',desc:'先透過修行累積訓練值，再採集餌料，最後挑戰沼澤之王。',action:(S.res.training<12?'切到森林修行':'切到採集餌料')};
+ if(!S.flags.mito)return {title:'把成果帶回碼頭',desc:'向米特證明自己已經能啟程，取得離島前的祝福與便當。',action:'按下「把成果帶給米特」'};
+ if(!S.flags.depart)return {title:'登船離開鯨魚島',desc:'帶著米特的便當與決心，正式朝獵人試驗的方向前進。',action:'按下「登船離開鯨魚島」'};
+ if(!S.flags.storm)return {title:'撐過海上風暴',desc:'維持體力並承受甲板上的風浪，完成前往試驗的第一個考驗。',action:'按下「迎戰風暴」'};
+ if(!S.flags.metFriends)return {title:'與同船考生相識',desc:'風暴結束後，認識雷歐力與酷拉皮卡。',action:'按下「和另外兩人交談」'};
+ if(!S.flags.captain)return {title:'接受船長的試探',desc:'船長正在觀察三人是否真正具備獵人的心志。',action:'按下「注意船長的試探」'};
+ if(!S.flags.complete)return {title:'說出成為獵人的理由',desc:'通過船長的提問，取得前往真正試驗會場的線索。',action:'按下船長回答選項'};
+ return {title:'等待下一章更新',desc:'目前主線已完成到試驗之路前，下一版將進入多雷港與獵人試驗前置。',action:'持續放置累積資源'};
+}
+
 function renderCurrentActivity(){const a=activityDef(),elapsed=clamp(S.activityProgress||0,0,a.duration),remain=a.duration-elapsed,pct=elapsed/a.duration*100;document.getElementById('currentActivityName').textContent=`${a.icon} ${a.name}`;document.getElementById('currentActivityMeta').textContent=`${a.duration} 秒一輪 · 完成後一次結算`;document.getElementById('currentActivityTimer').textContent=clockText(remain);document.getElementById('currentActivityBar').style.width=pct+'%';document.getElementById('currentActivityReward').textContent=rewardLabel(cycleRewards(a.id));document.getElementById('currentActivityHourly').textContent=hourlyLabel(a.id);document.getElementById('offlineForecast').textContent=offline72Label(a.id)}
 function renderActivities(){document.getElementById('activityList').innerHTML=activities.filter(a=>a.unlock()).map(a=>`<div class="activity ${S.activity===a.id?'active':''}"><div style="flex:1;min-width:0"><div class="activity-title"><span class="activity-icon">${a.icon}</span><div><b>${a.name}</b><div class="meta">${a.desc}</div></div></div><div class="activity-reward">${activityRewardText(a.id)}</div></div><button class="btn ${S.activity===a.id?'primary':''}" data-act="${a.id}">${S.activity===a.id?'進行中':'切換'}</button></div>`).join('');document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{if(S.activity===b.dataset.act)return;S.activity=b.dataset.act;S.activityProgress=0;addLog(`放置活動切換為「${activities.find(a=>a.id===S.activity).name}」，新一輪開始計時。`);save();render()})}
 function renderQuests(){const qs=questData(),done=qs.filter(q=>q.done).length;document.getElementById('questList').innerHTML=qs.map(q=>`<div class="quest ${q.done?'done':''}"><b>${q.done?'✓ ':''}${q.name}</b><small>${q.desc}</small></div>`).join('');document.getElementById('questProgressText').textContent=`${done} / ${qs.length}`;document.getElementById('questProgressBar').style.width=(done/qs.length*100)+'%'}
@@ -283,9 +407,13 @@ function renderTimeline(){const rows=[
  ['○','287 期獵人試驗','漫畫第 5 話起',false]
  ];document.getElementById('timeline').innerHTML=rows.map(r=>`<div class="item"><div class="icon">${r[3]?'✓':r[0]}</div><div><b>${r[1]}</b><small>${r[2]}${r[3]?' · 已完成':''}</small></div></div>`).join('')+'<small style="display:block;margin-top:10px;color:#819d90">初版以漫畫事件順序為主；年份精確日期在不同資料整理中存在差異，因此遊戲內先不鎖定到單一日。</small>'}
 function renderLogs(){document.getElementById('log').innerHTML=S.logs.map(l=>`<div class="log-row"><time>${l.t}</time>${l.msg}</div>`).join('')||'<div class="log-row">旅程才剛開始。</div>'}
-function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.2「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一階段：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場。v0.2 先完成放置面板與計時系統重製，存檔可直接沿用。</div></div>`:''}
-function renderStats(){const need=expNeed(),remain=Math.max(0,need-S.exp),scene=(SCENES[S.scene]||SCENES.whale);document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=scene.name.split('・')[0];document.getElementById('hudStage').textContent=scene.name;document.getElementById('playTimeText').textContent=formatDuration(S.playSeconds);document.getElementById('expSources').innerHTML=`<b>固定 EXP：</b>森林修行每 30 秒 +1.35 EXP（每小時約 +162）<br><b>劇情 EXP：</b>沼澤之王 +28｜米特 +12｜風暴 +25｜船長回答 +35<br><span style="color:#8fa99b">採集與一般釣魚不提供 EXP；離線收益以目前活動的 55% 效率計算。</span>`}
-function render(){renderStats();renderCurrentActivity();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
+function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.3「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一階段：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場。v0.2 先完成放置面板與計時系統重製，存檔可直接沿用。</div></div>`:''}
+function renderStats(){const need=expNeed(),remain=Math.max(0,need-S.exp),scene=(SCENES[S.scene]||SCENES.whale);
+ const trainHour=cycleRewards('train',3600/activityDef('train').duration).exp||0;
+ const eta=trainHour>0 ? (remain<=0 ? '可升級' : formatDuration(remain/trainHour*3600)) : '—';
+ const mainText=(currentObjective().title||'鯨魚島的約定');document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=scene.name.split('・')[0];document.getElementById('hudStage').textContent=scene.name;document.getElementById('playTimeText').textContent=formatDuration(S.playSeconds);document.getElementById('nextLevelEta').textContent=eta;document.getElementById('mainQuestText').textContent=mainText;document.getElementById('expSources').innerHTML=`<b>固定 EXP：</b>森林修行每 30 秒 +1.35 EXP（每小時約 +162）<br><b>劇情 EXP：</b>沼澤之王 +28｜米特 +12｜風暴 +25｜船長回答 +35<br><span style="color:#8fa99b">採集與一般釣魚不提供 EXP；離線收益以目前活動的 55% 效率計算。</span>`}
+function renderObjective(){const o=currentObjective();document.getElementById('objectiveTitle').textContent=o.title;document.getElementById('objectiveDesc').textContent=o.desc;document.getElementById('objectiveAction').textContent=o.action}
+function render(){renderStats();renderCurrentActivity();renderObjective();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
 
 // tabs
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.tab-pane').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t.dataset.tab).classList.add('active')});
