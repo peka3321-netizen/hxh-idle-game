@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>獵人編年史：小傑篇 v0.4.0</title>
+<title>獵人編年史：小傑篇 v0.4.1</title>
 <meta name="description" content="非官方 HUNTER×HUNTER 同人放置遊戲初始版，以小傑的故事時間線為主。" />
 <style>
 :root{
@@ -19,7 +19,7 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
 @media(max-width:480px){.statgrid{grid-template-columns:1fr 1fr}.top-actions .btn{font-size:12px;padding:7px 8px}.brand h1{font-size:19px}.badge{width:40px;height:40px}.dialogue{font-size:14px}.scene-title b{font-size:16px}}
 
 /* v0.2 HUD / idle panel */
-.status-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:-2px 0 14px}.status-pill{background:#0b1d17cc;border:1px solid #294d3f;border-radius:12px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.status-pill span{color:var(--muted);font-size:11px}.status-pill b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.current-activity{border:1px solid #52775f;background:linear-gradient(145deg,#0b1c16,#102b20);border-radius:15px;padding:12px;margin-bottom:10px;box-shadow:inset 0 0 24px #b8ef6f08}.current-activity-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.current-activity-name{font-size:17px;font-weight:900;color:#f2ebd1}.current-activity-time{font-variant-numeric:tabular-nums;color:var(--lime);font-weight:900;white-space:nowrap}.activity-cycle-bar{height:12px;background:#06110d;border:1px solid #2a4a3c;border-radius:999px;overflow:hidden;margin:10px 0 8px}.activity-cycle-fill{height:100%;background:linear-gradient(90deg,#4d9c5c,#b8ef6f);width:0;transition:.3s linear}.activity-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px}.activity-summary>div{background:#071611aa;border:1px solid #244638;border-radius:10px;padding:8px}.activity-summary small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}.activity-summary b{font-size:11px;line-height:1.45}.activity{position:relative;overflow:hidden;padding:11px}.activity::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#315748}.activity.active::before{background:var(--lime)}.activity-title{display:flex;align-items:center;gap:8px}.activity-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#153529;border:1px solid #315a48;flex:0 0 auto}.activity-reward{color:#d7e8dd;font-size:11px;margin-top:5px;line-height:1.5}.quest-overview{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 0 7px;font-size:11px;color:var(--muted)}.quest-overview b{color:#e6f3e9}.quest-mini-bar{height:7px;background:#07110e;border-radius:999px;overflow:hidden;border:1px solid #274739;margin-bottom:10px}.quest-mini-fill{height:100%;background:linear-gradient(90deg,#3f8a55,#b8ef6f);width:0;transition:.25s}.offline-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.offline-grid>div{background:#0a1914;border:1px solid #315144;border-radius:10px;padding:9px}.offline-grid small{display:block;color:var(--muted);font-size:10px}.offline-grid b{font-size:12px}.modal-box.offline-report{max-width:520px}.offline-reward-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed #315144}.offline-reward-row:last-child{border-bottom:0}.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #b8ef6f;display:inline-block;margin-right:5px}
+.status-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:-2px 0 14px}.status-pill{background:#0b1d17cc;border:1px solid #294d3f;border-radius:12px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.status-pill span{color:var(--muted);font-size:11px}.status-pill b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.current-activity{border:1px solid #52775f;background:linear-gradient(145deg,#0b1c16,#102b20);border-radius:15px;padding:12px;margin-bottom:10px;box-shadow:inset 0 0 24px #b8ef6f08}.current-activity-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.current-activity-name{font-size:17px;font-weight:900;color:#f2ebd1}.current-activity-time{font-variant-numeric:tabular-nums;color:var(--lime);font-weight:900;white-space:nowrap}.activity-cycle-bar{height:12px;background:#06110d;border:1px solid #2a4a3c;border-radius:999px;overflow:hidden;margin:10px 0 8px}.activity-cycle-fill{height:100%;background:linear-gradient(90deg,#4d9c5c,#b8ef6f);width:0;transition:.3s linear}.activity-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px}.activity-summary>div{background:#071611aa;border:1px solid #244638;border-radius:10px;padding:8px}.activity-summary small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}.activity-summary b{font-size:11px;line-height:1.45}.activity{position:relative;overflow:hidden;padding:11px}.activity::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#315748}.activity.active::before{background:var(--lime)}.activity-title{display:flex;align-items:center;gap:8px}.activity-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#153529;border:1px solid #315a48;flex:0 0 auto}.activity-reward{color:#d7e8dd;font-size:11px;margin-top:5px;line-height:1.5}.quest-overview{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 0 7px;font-size:11px;color:var(--muted)}.quest-overview b{color:#e6f3e9}.quest-mini-bar{height:7px;background:#07110e;border-radius:999px;overflow:hidden;border:1px solid #274739;margin-bottom:10px}.quest-mini-fill{height:100%;background:linear-gradient(90deg,#3f8a55,#b8ef6f);width:0;transition:.25s}.offline-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.offline-grid>div{background:#0a1914;border:1px solid #315144;border-radius:10px;padding:9px}.offline-grid small{display:block;color:var(--muted);font-size:10px}.offline-grid b{font-size:12px}.modal-box.offline-report{max-width:520px}.offline-reward-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed #315144}.offline-reward-row:last-child{border-bottom:0}.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #b8ef6f;display:inline-block;margin-right:5px}
 @media(max-width:760px){.status-strip{grid-template-columns:1fr 1fr}.current-activity{padding:10px}.activity-summary{grid-template-columns:1fr}.offline-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.status-strip{grid-template-columns:1fr 1fr}.status-pill{padding:8px}.status-pill b{font-size:11px}.current-activity-head{align-items:center}.current-activity-name{font-size:15px}}
 
@@ -127,7 +127,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
   <header class="topbar">
     <div class="brand">
       <div class="badge">H×H</div>
-      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.4.0「試驗前哨」</small></div>
+      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.4.1「試驗前哨・存檔修正」</small></div>
     </div>
     <div class="top-actions">
       <button class="btn" id="saveBtn">儲存</button>
@@ -142,6 +142,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
     <div class="status-pill"><span>⏱ 遊玩時間</span><b id="playTimeText">0 分</b></div>
     <div class="status-pill"><span>🌙 離線上限</span><b>72 小時</b></div>
     <div class="status-pill"><span><i class="pulse-dot"></i>存檔</span><b>每 5 秒自動儲存</b></div>
+    <div class="status-pill version-pill"><span>🧩 目前版本</span><b>v0.4.1</b></div>
   </div>
 
   <div class="chapter-track" aria-label="主線章節進度">
@@ -267,7 +268,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 (() => {
 'use strict';
 const SAVE_KEY = 'hxh_gon_idle_v01';
-const VERSION = '0.4.0';
+const VERSION = '0.4.1';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const now=()=>Date.now();
 const fmt=n=>Math.floor(n).toLocaleString('zh-TW');
@@ -316,7 +317,24 @@ function gainExp(n){S.exp+=n; while(S.exp>=expNeed()){S.exp-=expNeed();S.level++
 function addLog(msg){const t=new Date();S.logs.unshift({t:t.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}),msg});S.logs=S.logs.slice(0,80)}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1800)}
 function save(show=false){S.lastTick=now();localStorage.setItem(SAVE_KEY,JSON.stringify(S));if(show)toast('已儲存進度')}
-function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;const d=JSON.parse(raw);S={...defaultState(),...d,stats:{...defaultState().stats,...d.stats},res:{...defaultState().res,...d.res},inventory:{...defaultState().inventory,...d.inventory},flags:{...defaultState().flags,...d.flags}};S.version=VERSION;const away=Math.min(72*3600,Math.max(0,(now()-(d.lastTick||now()))/1000));if(away>10){offlineReport=offlineGain(away);addLog(`離線 ${formatDuration(away)}，已結算 ${offlineReport.cycles} 輪「${offlineReport.name}」。`)}}catch(e){console.warn(e)}}
+function migrateState(d){
+  const oldVersion=String(d.version||'0.1.0');
+  d.flags={...defaultState().flags,...(d.flags||{})};
+  // v0.3 ended immediately after the captain route clue. Move that save to v0.4's port transition.
+  if(d.flags.complete && !d.flags.dolle && (Number(d.stage)||0)>=8){
+    d.stage=8;
+    d.storyStep=8;
+    d.scene='port';
+  }
+  // If a partially migrated save already has later flags, rebuild a consistent stage/scene.
+  if(d.flags.examHall){d.stage=14;d.storyStep=14;d.scene='exam';}
+  else if(d.flags.kiriko){d.stage=13;d.storyStep=13;d.scene='pine';}
+  else if(d.flags.quiz){d.stage=11;d.storyStep=11;d.scene='pine';}
+  else if(d.flags.dolle){d.stage=Math.max(9,Number(d.stage)||9); if(d.stage<10)d.scene='dolle';}
+  d.version=VERSION;
+  return d;
+}
+function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;let d=migrateState(JSON.parse(raw));S={...defaultState(),...d,stats:{...defaultState().stats,...d.stats},res:{...defaultState().res,...d.res},inventory:{...defaultState().inventory,...d.inventory},flags:{...defaultState().flags,...d.flags}};S.version=VERSION;const away=Math.min(72*3600,Math.max(0,(now()-(d.lastTick||now()))/1000));if(away>10){offlineReport=offlineGain(away);addLog(`離線 ${formatDuration(away)}，已結算 ${offlineReport.cycles} 輪「${offlineReport.name}」。`)}save(false)}catch(e){console.warn(e)}}
 
 const activities=[
   {id:'train',icon:'🏃',name:'森林修行',desc:'鍛鍊感知並取得經驗',duration:30,unlock:()=>S.stage<=3||S.flags.complete},
