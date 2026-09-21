@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>獵人編年史：小傑篇 v0.1.1</title>
+<title>獵人編年史：小傑篇 v0.2.0</title>
 <meta name="description" content="非官方 HUNTER×HUNTER 同人放置遊戲初始版，以小傑的故事時間線為主。" />
 <style>
 :root{
@@ -17,6 +17,12 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
 @media(max-width:1050px){.layout{grid-template-columns:280px 1fr}.rightcol{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px}.rightcol>.card{min-width:0}}
 @media(max-width:760px){.app{padding:10px}.layout{display:block}.layout>.card,.rightcol>.card{margin-bottom:10px}.rightcol{display:block}.topbar{align-items:flex-start}.top-actions{justify-content:flex-end}.brand small{max-width:220px}.scene{min-height:250px}.scene svg{min-height:250px}.statgrid{grid-template-columns:repeat(4,1fr)}.stat{padding:8px}.stat b{font-size:15px}.skills{grid-template-columns:1fr}.scene-info{align-items:flex-start;flex-direction:column}.timeline-tag{align-self:flex-start}}
 @media(max-width:480px){.statgrid{grid-template-columns:1fr 1fr}.top-actions .btn{font-size:12px;padding:7px 8px}.brand h1{font-size:19px}.badge{width:40px;height:40px}.dialogue{font-size:14px}.scene-title b{font-size:16px}}
+
+/* v0.2 HUD / idle panel */
+.status-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:-2px 0 14px}.status-pill{background:#0b1d17cc;border:1px solid #294d3f;border-radius:12px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.status-pill span{color:var(--muted);font-size:11px}.status-pill b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.current-activity{border:1px solid #52775f;background:linear-gradient(145deg,#0b1c16,#102b20);border-radius:15px;padding:12px;margin-bottom:10px;box-shadow:inset 0 0 24px #b8ef6f08}.current-activity-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.current-activity-name{font-size:17px;font-weight:900;color:#f2ebd1}.current-activity-time{font-variant-numeric:tabular-nums;color:var(--lime);font-weight:900;white-space:nowrap}.activity-cycle-bar{height:12px;background:#06110d;border:1px solid #2a4a3c;border-radius:999px;overflow:hidden;margin:10px 0 8px}.activity-cycle-fill{height:100%;background:linear-gradient(90deg,#4d9c5c,#b8ef6f);width:0;transition:.3s linear}.activity-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px}.activity-summary>div{background:#071611aa;border:1px solid #244638;border-radius:10px;padding:8px}.activity-summary small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}.activity-summary b{font-size:11px;line-height:1.45}.activity{position:relative;overflow:hidden;padding:11px}.activity::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#315748}.activity.active::before{background:var(--lime)}.activity-title{display:flex;align-items:center;gap:8px}.activity-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#153529;border:1px solid #315a48;flex:0 0 auto}.activity-reward{color:#d7e8dd;font-size:11px;margin-top:5px;line-height:1.5}.quest-overview{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 0 7px;font-size:11px;color:var(--muted)}.quest-overview b{color:#e6f3e9}.quest-mini-bar{height:7px;background:#07110e;border-radius:999px;overflow:hidden;border:1px solid #274739;margin-bottom:10px}.quest-mini-fill{height:100%;background:linear-gradient(90deg,#3f8a55,#b8ef6f);width:0;transition:.25s}.offline-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.offline-grid>div{background:#0a1914;border:1px solid #315144;border-radius:10px;padding:9px}.offline-grid small{display:block;color:var(--muted);font-size:10px}.offline-grid b{font-size:12px}.modal-box.offline-report{max-width:520px}.offline-reward-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed #315144}.offline-reward-row:last-child{border-bottom:0}.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #b8ef6f;display:inline-block;margin-right:5px}
+@media(max-width:760px){.status-strip{grid-template-columns:1fr 1fr}.current-activity{padding:10px}.activity-summary{grid-template-columns:1fr}.offline-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.status-strip{grid-template-columns:1fr 1fr}.status-pill{padding:8px}.status-pill b{font-size:11px}.current-activity-head{align-items:center}.current-activity-name{font-size:15px}}
+
 </style>
 </head>
 <body>
@@ -24,7 +30,7 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
   <header class="topbar">
     <div class="brand">
       <div class="badge">H×H</div>
-      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.1.1「離島之日」</small></div>
+      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.2.0「放置介面革新」</small></div>
     </div>
     <div class="top-actions">
       <button class="btn" id="saveBtn">儲存</button>
@@ -33,6 +39,13 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
       <button class="btn danger" id="resetBtn">重來</button>
     </div>
   </header>
+
+  <div class="status-strip">
+    <div class="status-pill"><span>目前章節</span><b id="hudStage">鯨魚島</b></div>
+    <div class="status-pill"><span>遊玩時間</span><b id="playTimeText">0 分</b></div>
+    <div class="status-pill"><span>離線上限</span><b>72 小時</b></div>
+    <div class="status-pill"><span><i class="pulse-dot"></i>存檔</span><b>每 5 秒自動儲存</b></div>
+  </div>
 
   <main class="layout">
     <section class="card leftcol">
@@ -54,9 +67,23 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
         <div class="mini-title">經驗取得</div>
         <div class="info-box" id="expSources"></div>
         <div class="mini-title">目前放置活動</div>
-        <div class="offline-note">離線放置最多累積 <b>72 小時</b>｜目前離線效率 <b>55%</b></div>
+        <div class="current-activity">
+          <div class="current-activity-head"><div><div class="current-activity-name" id="currentActivityName">森林修行</div><div class="meta" id="currentActivityMeta">30 秒一輪</div></div><div class="current-activity-time" id="currentActivityTimer">00:30</div></div>
+          <div class="activity-cycle-bar"><div class="activity-cycle-fill" id="currentActivityBar"></div></div>
+          <div class="activity-summary">
+            <div><small>本輪完成獎勵</small><b id="currentActivityReward">EXP +1.35</b></div>
+            <div><small>每小時預估</small><b id="currentActivityHourly">EXP +162</b></div>
+          </div>
+          <div class="offline-grid">
+            <div><small>離線效率</small><b>55%</b></div>
+            <div><small>72 小時滿額預估</small><b id="offlineForecast">—</b></div>
+          </div>
+        </div>
+        <div class="offline-note">離線時會保留目前活動進度，最多結算 <b>72 小時</b>；回到遊戲後會顯示收益報告。</div>
         <div id="activityList"></div>
         <div class="mini-title">主線目標</div>
+        <div class="quest-overview"><span>章節完成度</span><b id="questProgressText">0 / 6</b></div>
+        <div class="quest-mini-bar"><div class="quest-mini-fill" id="questProgressBar"></div></div>
         <div id="questList"></div>
       </div>
     </section>
@@ -91,17 +118,18 @@ button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}
       </section>
     </aside>
   </main>
-  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。</div>
+  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。v0.2 新增週期計時、每小時收益與離線報告。</div>
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="modal" id="offlineModal"><div class="modal-box offline-report"><h3>離線修行報告</h3><div id="offlineReportBody"></div><div class="choice-row"><button class="btn primary" id="offlineClose">收下收益</button></div></div></div>
 <div class="modal" id="saveModal"><div class="modal-box"><h3 id="modalTitle">存檔資料</h3><textarea id="saveText"></textarea><div class="choice-row"><button class="btn primary" id="modalApply">套用匯入</button><button class="btn" id="modalCopy">複製</button><button class="btn" id="modalClose">關閉</button></div></div></div>
 
 <script>
 (() => {
 'use strict';
 const SAVE_KEY = 'hxh_gon_idle_v01';
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const now=()=>Date.now();
 const fmt=n=>Math.floor(n).toLocaleString('zh-TW');
@@ -117,11 +145,11 @@ const SCENES={
 const defaultState=()=>({
   version:VERSION, created:now(), lastTick:now(), stage:0, scene:'whale', level:1, exp:0, energy:100, maxEnergy:100, jenny:0,
   stats:{sense:1,body:1,will:1,fish:1,bond:0},
-  res:{training:0,bait:0,herb:0,fish:0}, inventory:{rod:1}, activity:'train',
+  res:{training:0,bait:0,herb:0,fish:0}, inventory:{rod:1}, activity:'train', activityProgress:0, completedCycles:0,
   flags:{master:false,mito:false,depart:false,storm:false,metFriends:false,captain:false,complete:false},
   boss:null, storyStep:0, logs:[], unlocked:['gon','mito'], playSeconds:0
 });
-let S=defaultState();
+let S=defaultState(), offlineReport=null;
 
 const dialogues=[
   {stage:0,speaker:'旁白',text:'鯨魚島的清晨。離獵人試驗出發日只剩不多時間。米特阿姨答應：只要你能釣起這座島上人人都知道的「沼澤之王」，她就不再阻止你離開。'},
@@ -140,21 +168,29 @@ function gainExp(n){S.exp+=n; while(S.exp>=expNeed()){S.exp-=expNeed();S.level++
 function addLog(msg){const t=new Date();S.logs.unshift({t:t.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}),msg});S.logs=S.logs.slice(0,80)}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1800)}
 function save(show=false){S.lastTick=now();localStorage.setItem(SAVE_KEY,JSON.stringify(S));if(show)toast('已儲存進度')}
-function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;const d=JSON.parse(raw);S={...defaultState(),...d,stats:{...defaultState().stats,...d.stats},res:{...defaultState().res,...d.res},inventory:{...defaultState().inventory,...d.inventory},flags:{...defaultState().flags,...d.flags}};const away=Math.min(72*3600,Math.max(0,(now()-(d.lastTick||now()))/1000));if(away>10){offlineGain(away);addLog(`離線 ${Math.floor(away/60)} 分鐘，已結算放置收益。`)}}catch(e){console.warn(e)}}
-function offlineGain(sec){const mult=.55; if(S.activity==='train'){S.res.training+=sec*.12*mult*(1+S.level*.04);gainExp(sec*.04*mult)} if(S.activity==='gather'){S.res.bait+=sec*.035*mult;S.res.herb+=sec*.018*mult} if(S.activity==='fish'){S.res.fish+=sec*.025*mult;S.jenny+=sec*.06*mult}}
+function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;const d=JSON.parse(raw);S={...defaultState(),...d,stats:{...defaultState().stats,...d.stats},res:{...defaultState().res,...d.res},inventory:{...defaultState().inventory,...d.inventory},flags:{...defaultState().flags,...d.flags}};S.version=VERSION;const away=Math.min(72*3600,Math.max(0,(now()-(d.lastTick||now()))/1000));if(away>10){offlineReport=offlineGain(away);addLog(`離線 ${formatDuration(away)}，已結算 ${offlineReport.cycles} 輪「${offlineReport.name}」。`)}}catch(e){console.warn(e)}}
 
 const activities=[
-  {id:'train',name:'森林修行',desc:'感知訓練 + 經驗',unlock:()=>S.stage<=3||S.flags.complete},
-  {id:'gather',name:'採集餌料',desc:'取得餌料與草藥',unlock:()=>S.stage<=3||S.flags.complete},
-  {id:'fish',name:'海邊釣魚',desc:'少量戒尼與魚獲',unlock:()=>S.flags.master}
+  {id:'train',icon:'🏃',name:'森林修行',desc:'鍛鍊感知並取得經驗',duration:30,unlock:()=>S.stage<=3||S.flags.complete},
+  {id:'gather',icon:'🌿',name:'採集餌料',desc:'取得餌料與草藥',duration:45,unlock:()=>S.stage<=3||S.flags.complete},
+  {id:'fish',icon:'🎣',name:'海邊釣魚',desc:'取得魚獲與少量戒尼',duration:60,unlock:()=>S.flags.master}
 ];
+function activityDef(id=S.activity){return activities.find(a=>a.id===id)||activities[0]}
+function cycleRewards(id=S.activity,mult=1){
+  if(id==='train')return {exp:1.35*mult,training:3.9*(1+S.level*.04)*mult};
+  if(id==='gather')return {bait:1.71*mult,herb:.81*mult};
+  if(id==='fish')return {fish:1.5*mult,jenny:3.9*mult};
+  return {};
+}
+function applyRewards(id,mult=1){const r=cycleRewards(id,mult);if(r.exp)gainExp(r.exp);if(r.training)S.res.training+=r.training;if(r.bait)S.res.bait+=r.bait;if(r.herb)S.res.herb+=r.herb;if(r.fish)S.res.fish+=r.fish;if(r.jenny)S.jenny+=r.jenny;if(S.res.training>=10&&S.stats.sense<2)S.stats.sense=2;if(S.res.training>=24&&S.stats.body<2)S.stats.body=2;return r}
+function offlineGain(sec){const mult=.55,a=activityDef();const total=(S.activityProgress||0)+sec;const cycles=Math.floor(total/a.duration);S.activityProgress=total%a.duration;const rewards=cycles>0?applyRewards(a.id,cycles*mult):{};return {seconds:sec,cycles,name:a.name,rewards,efficiency:mult}}
+function completeActivity(){const a=activityDef();const r=applyRewards(a.id,1);S.completedCycles=(S.completedCycles||0)+1;if(S.completedCycles%10===0)addLog(`「${a.name}」累積完成 ${S.completedCycles} 輪。`);return r}
 
 function tick(dt){
   S.playSeconds+=dt;
   S.energy=clamp(S.energy+dt*(.55+S.level*.02),0,S.maxEnergy);
-  if(S.activity==='train'){S.res.training+=dt*.13*(1+S.level*.04);gainExp(dt*.045); if(S.res.training>=10 && S.stats.sense<2)S.stats.sense=2; if(S.res.training>=24 && S.stats.body<2)S.stats.body=2;}
-  if(S.activity==='gather'){S.res.bait+=dt*.038;S.res.herb+=dt*.018;}
-  if(S.activity==='fish'&&S.flags.master){S.res.fish+=dt*.025;S.jenny+=dt*.065;}
+  const a=activityDef();
+  if(a.unlock()){S.activityProgress=(S.activityProgress||0)+dt;while(S.activityProgress>=a.duration){S.activityProgress-=a.duration;completeActivity()}}
   if(S.boss)bossTick(dt);
   autoAdvance();
 }
@@ -192,7 +228,7 @@ function storyAction(action){
  if(action==='storm')startStorm();
  if(action==='meet'&&S.flags.storm){S.flags.metFriends=true;S.stage=6;S.storyStep=6;unlock('kurapika');unlock('leorio');S.stats.bond+=1;addLog('你與雷歐力、酷拉皮卡互相認識。')}
  if(action==='captain'&&S.flags.metFriends){S.flags.captain=true;S.stage=7;S.storyStep=7;addLog('船長開始詢問三人的真正動機。')}
- if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.1 主線完成。');toast('v0.1 主線完成！')}
+ if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.2 目前主線完成。');toast('目前主線完成！')}
  save();render();
 }
 
@@ -210,17 +246,14 @@ function questData(){
 
 function sceneHTML(){const sc=SCENES[S.scene]||SCENES.whale;return `${sc.svg}<div class="scene-info"><div class="scene-title"><b>${sc.name}</b><span>主角：小傑・富力士</span></div><div class="timeline-tag">${sc.tag}</div></div>`}
 function formatDuration(sec){sec=Math.max(0,sec);if(sec<60)return `${Math.ceil(sec)} 秒`;if(sec<3600)return `${Math.floor(sec/60)} 分 ${Math.ceil(sec%60)} 秒`;return `${Math.floor(sec/3600)} 小時 ${Math.ceil((sec%3600)/60)} 分`}
-function activityRewardText(id){
- if(id==='train'){
-   const rate=.045, need=Math.max(0,expNeed()-S.exp), eta=need/rate;
-   return `持續獲得 EXP｜30 秒約 +${(rate*30).toFixed(2)} EXP｜每分鐘 +${(rate*60).toFixed(1)} EXP｜距離 Lv.${S.level+1} 約 ${formatDuration(eta)}`;
- }
- if(id==='gather')return `採集不提供 EXP｜45 秒約：餌料 +${(.038*45).toFixed(2)}、草藥 +${(.018*45).toFixed(2)}`;
- if(id==='fish')return `釣魚目前不提供 EXP｜60 秒約：魚獲 +${(.025*60).toFixed(2)}、戒尼 +${(.065*60).toFixed(1)}`;
- return '';
-}
-function renderActivities(){document.getElementById('activityList').innerHTML=activities.filter(a=>a.unlock()).map(a=>`<div class="activity ${S.activity===a.id?'active':''}"><div style="flex:1"><b>${a.name}</b><div class="meta">${a.desc}</div><div class="exp-detail">${activityRewardText(a.id)}</div></div><button class="btn ${S.activity===a.id?'primary':''}" data-act="${a.id}">${S.activity===a.id?'進行中':'選擇'}</button></div>`).join('');document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{S.activity=b.dataset.act;addLog(`放置活動切換為「${activities.find(a=>a.id===S.activity).name}」。`);render()})}
-function renderQuests(){document.getElementById('questList').innerHTML=questData().map(q=>`<div class="quest ${q.done?'done':''}"><b>${q.done?'✓ ':''}${q.name}</b><small>${q.desc}</small></div>`).join('')}
+function clockText(sec){sec=Math.max(0,Math.ceil(sec));const m=Math.floor(sec/60),s=sec%60;return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
+function rewardLabel(r){const parts=[];if(r.exp)parts.push(`EXP +${r.exp.toFixed(2)}`);if(r.training)parts.push(`訓練 +${r.training.toFixed(1)}`);if(r.bait)parts.push(`餌料 +${r.bait.toFixed(2)}`);if(r.herb)parts.push(`草藥 +${r.herb.toFixed(2)}`);if(r.fish)parts.push(`魚獲 +${r.fish.toFixed(2)}`);if(r.jenny)parts.push(`戒尼 +${r.jenny.toFixed(1)}`);return parts.join('｜')||'—'}
+function hourlyLabel(id){const a=activityDef(id),r=cycleRewards(id,3600/a.duration);return rewardLabel(r)}
+function offline72Label(id){const a=activityDef(id),r=cycleRewards(id,(72*3600/a.duration)*.55);if(r.exp)return `EXP +${Math.floor(r.exp).toLocaleString('zh-TW')}`;if(r.bait)return `餌料 +${Math.floor(r.bait)} / 草藥 +${Math.floor(r.herb)}`;if(r.fish)return `魚獲 +${Math.floor(r.fish)} / 戒尼 +${Math.floor(r.jenny)}`;return '—'}
+function activityRewardText(id){const a=activityDef(id),r=cycleRewards(id);return `${a.duration} 秒一輪｜${rewardLabel(r)}｜每小時：${hourlyLabel(id)}`}
+function renderCurrentActivity(){const a=activityDef(),elapsed=clamp(S.activityProgress||0,0,a.duration),remain=a.duration-elapsed,pct=elapsed/a.duration*100;document.getElementById('currentActivityName').textContent=`${a.icon} ${a.name}`;document.getElementById('currentActivityMeta').textContent=`${a.duration} 秒一輪 · 完成後一次結算`;document.getElementById('currentActivityTimer').textContent=clockText(remain);document.getElementById('currentActivityBar').style.width=pct+'%';document.getElementById('currentActivityReward').textContent=rewardLabel(cycleRewards(a.id));document.getElementById('currentActivityHourly').textContent=hourlyLabel(a.id);document.getElementById('offlineForecast').textContent=offline72Label(a.id)}
+function renderActivities(){document.getElementById('activityList').innerHTML=activities.filter(a=>a.unlock()).map(a=>`<div class="activity ${S.activity===a.id?'active':''}"><div style="flex:1;min-width:0"><div class="activity-title"><span class="activity-icon">${a.icon}</span><div><b>${a.name}</b><div class="meta">${a.desc}</div></div></div><div class="activity-reward">${activityRewardText(a.id)}</div></div><button class="btn ${S.activity===a.id?'primary':''}" data-act="${a.id}">${S.activity===a.id?'進行中':'切換'}</button></div>`).join('');document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{if(S.activity===b.dataset.act)return;S.activity=b.dataset.act;S.activityProgress=0;addLog(`放置活動切換為「${activities.find(a=>a.id===S.activity).name}」，新一輪開始計時。`);save();render()})}
+function renderQuests(){const qs=questData(),done=qs.filter(q=>q.done).length;document.getElementById('questList').innerHTML=qs.map(q=>`<div class="quest ${q.done?'done':''}"><b>${q.done?'✓ ':''}${q.name}</b><small>${q.desc}</small></div>`).join('');document.getElementById('questProgressText').textContent=`${done} / ${qs.length}`;document.getElementById('questProgressBar').style.width=(done/qs.length*100)+'%'}
 function renderDialogue(){const d=getDialogue();document.getElementById('speaker').textContent=d.speaker;document.getElementById('dialogueText').textContent=d.text;let buttons=[];
  if(S.stage===2&&!S.flags.master)buttons.push(['master','開始放置拉鋸','gold']);
  if(S.stage===3&&S.flags.master&&!S.flags.mito)buttons.push(['mito','把成果帶給米特','primary']);
@@ -250,9 +283,9 @@ function renderTimeline(){const rows=[
  ['○','287 期獵人試驗','漫畫第 5 話起',false]
  ];document.getElementById('timeline').innerHTML=rows.map(r=>`<div class="item"><div class="icon">${r[3]?'✓':r[0]}</div><div><b>${r[1]}</b><small>${r[2]}${r[3]?' · 已完成':''}</small></div></div>`).join('')+'<small style="display:block;margin-top:10px;color:#819d90">初版以漫畫事件順序為主；年份精確日期在不同資料整理中存在差異，因此遊戲內先不鎖定到單一日。</small>'}
 function renderLogs(){document.getElementById('log').innerHTML=S.logs.map(l=>`<div class="log-row"><time>${l.t}</time>${l.msg}</div>`).join('')||'<div class="log-row">旅程才剛開始。</div>'}
-function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.1「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一版建議：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場 → 第一關薩茨長跑。你的存檔可直接沿用。</div></div>`:''}
-function renderStats(){const need=expNeed(),remain=Math.max(0,need-S.exp);document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=(SCENES[S.scene]||SCENES.whale).name.split('・')[0];document.getElementById('expSources').innerHTML=`<b>主要來源：</b>森林修行每分鐘 +2.7 EXP（離線約 +1.32 EXP/分）<br>劇情事件：沼澤之王 +28｜米特 +12｜風暴 +25｜船長回答 +35<br><span style="color:#8fa99b">採集與一般釣魚目前不會增加 EXP。</span>`}
-function render(){renderStats();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
+function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.2「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一階段：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場。v0.2 先完成放置面板與計時系統重製，存檔可直接沿用。</div></div>`:''}
+function renderStats(){const need=expNeed(),remain=Math.max(0,need-S.exp),scene=(SCENES[S.scene]||SCENES.whale);document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=scene.name.split('・')[0];document.getElementById('hudStage').textContent=scene.name;document.getElementById('playTimeText').textContent=formatDuration(S.playSeconds);document.getElementById('expSources').innerHTML=`<b>固定 EXP：</b>森林修行每 30 秒 +1.35 EXP（每小時約 +162）<br><b>劇情 EXP：</b>沼澤之王 +28｜米特 +12｜風暴 +25｜船長回答 +35<br><span style="color:#8fa99b">採集與一般釣魚不提供 EXP；離線收益以目前活動的 55% 效率計算。</span>`}
+function render(){renderStats();renderCurrentActivity();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
 
 // tabs
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.tab-pane').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t.dataset.tab).classList.add('active')});
@@ -264,9 +297,11 @@ document.getElementById('importBtn').onclick=()=>{document.getElementById('modal
 document.getElementById('modalClose').onclick=()=>modal.classList.remove('show');document.getElementById('modalCopy').onclick=async()=>{try{await navigator.clipboard.writeText(txt.value);toast('已複製')}catch{txt.select();document.execCommand('copy');toast('已複製')}};
 apply.onclick=()=>{try{const d=JSON.parse(decodeURIComponent(escape(atob(txt.value.trim()))));localStorage.setItem(SAVE_KEY,JSON.stringify(d));load();modal.classList.remove('show');toast('匯入成功');render()}catch(e){toast('匯入失敗：存檔格式錯誤')}};
 document.getElementById('resetBtn').onclick=()=>{if(confirm('確定刪除目前進度並重新開始？')){localStorage.removeItem(SAVE_KEY);S=defaultState();addLog('新的旅程開始。');save();render()}};
+const offlineModal=document.getElementById('offlineModal');document.getElementById('offlineClose').onclick=()=>offlineModal.classList.remove('show');
+function showOfflineReport(){if(!offlineReport||offlineReport.seconds<=10)return;const r=offlineReport.rewards||{},rows=[];if(r.exp)rows.push(['經驗',`+${r.exp.toFixed(1)} EXP`]);if(r.training)rows.push(['訓練進度',`+${r.training.toFixed(1)}`]);if(r.bait)rows.push(['餌料',`+${r.bait.toFixed(1)}`]);if(r.herb)rows.push(['草藥',`+${r.herb.toFixed(1)}`]);if(r.fish)rows.push(['魚獲',`+${r.fish.toFixed(1)}`]);if(r.jenny)rows.push(['戒尼',`+${Math.floor(r.jenny).toLocaleString('zh-TW')}`]);document.getElementById('offlineReportBody').innerHTML=`<div class="info-box">離線 <b>${formatDuration(offlineReport.seconds)}</b>｜活動：<b>${offlineReport.name}</b>｜效率：<b>${Math.round(offlineReport.efficiency*100)}%</b>｜完成 <b>${offlineReport.cycles}</b> 輪</div>${rows.map(x=>`<div class="offline-reward-row"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')||'<div class="offline-reward-row"><span>尚未完成一整輪</span><b>進度已保留</b></div>'}`;offlineModal.classList.add('show');offlineReport=null}
 
-load();if(!S.logs.length)addLog('清晨的鯨魚島，新的旅程開始。');render();
-let last=performance.now(), acc=0;function loop(t){const dt=Math.min(.25,(t-last)/1000);last=t;tick(dt);acc+=dt;if(acc>.35){render();acc=0}requestAnimationFrame(loop)}requestAnimationFrame(loop);setInterval(()=>save(false),5000);
+load();if(!S.logs.length)addLog('清晨的鯨魚島，新的旅程開始。');render();setTimeout(showOfflineReport,120);
+let last=performance.now(), acc=0;function loop(t){const dt=Math.min(.25,(t-last)/1000);last=t;tick(dt);acc+=dt;if(acc>.25){render();acc=0}requestAnimationFrame(loop)}requestAnimationFrame(loop);setInterval(()=>save(false),5000);
 })();
 </script>
 </body>
