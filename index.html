@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>獵人編年史：小傑篇 v0.1</title>
+<meta name="description" content="非官方 HUNTER×HUNTER 同人放置遊戲初始版，以小傑的故事時間線為主。" />
+<style>
+:root{
+  --bg:#07110f; --bg2:#0e201a; --panel:#10271fdd; --panel2:#17352a;
+  --line:#2f5a49; --ink:#eef8e8; --muted:#a9c7b6; --lime:#b8ef6f;
+  --gold:#eecb6c; --red:#ef776c; --blue:#74c6df; --paper:#f4e8c8;
+  --shadow:0 18px 55px #0007; --radius:18px;
+}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;background:radial-gradient(circle at 18% 0%,#183426 0,#07110f 44%,#050b0a 100%);color:var(--ink);font-family:ui-rounded,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+button,input,select{font:inherit}.app{max-width:1500px;margin:auto;padding:18px}.topbar{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:14px}.brand{display:flex;align-items:center;gap:12px}.badge{width:47px;height:47px;border:2px solid var(--lime);border-radius:50%;display:grid;place-items:center;font-weight:900;color:var(--lime);box-shadow:0 0 22px #b8ef6f22 inset}.brand h1{font-size:clamp(20px,3vw,34px);margin:0;letter-spacing:.04em}.brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#173429;color:var(--ink);padding:9px 12px;border-radius:12px;cursor:pointer;transition:.15s;box-shadow:0 4px 15px #0004}.btn:hover{transform:translateY(-1px);border-color:#5b977d}.btn.primary{background:linear-gradient(135deg,#3b6f46,#234e39);border-color:#6dad68}.btn.gold{background:linear-gradient(135deg,#725b26,#4a3a19);border-color:#a88a3f}.btn.danger{background:#4a2525;border-color:#744}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}.layout{display:grid;grid-template-columns:310px minmax(420px,1fr) 330px;gap:14px}.card{background:linear-gradient(180deg,#132b23e8,#0d211bcc);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.card h2,.card h3{margin:0}.card-head{padding:14px 16px;border-bottom:1px solid #315144;background:#0e211bdd;display:flex;align-items:center;justify-content:space-between}.card-body{padding:14px}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#091813aa;border:1px solid #274b3d;border-radius:14px;padding:11px}.stat b{font-size:19px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.bar{height:10px;background:#07110e;border:1px solid #244739;border-radius:999px;overflow:hidden;margin-top:7px}.fill{height:100%;background:linear-gradient(90deg,#6cc56a,#c1ef72);width:0;transition:.25s}.fill.energy{background:linear-gradient(90deg,#468ca7,#75d0e8)}.fill.red{background:linear-gradient(90deg,#a43c38,#ef776c)}.mini-title{font-weight:800;color:var(--paper);margin:14px 0 8px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #315949;background:#0c1c17;padding:6px 9px;border-radius:999px;font-size:12px;color:#c7dfd1}.scene{position:relative;min-height:305px;background:#07100e;border-bottom:1px solid var(--line);overflow:hidden}.scene svg{width:100%;height:100%;min-height:305px;display:block}.scene-info{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;gap:12px;align-items:end}.scene-title{background:#06110ddd;border:1px solid #3e6656;padding:10px 12px;border-radius:13px;backdrop-filter:blur(8px)}.scene-title b{font-size:20px;display:block}.scene-title span{font-size:12px;color:#bdd2c6}.timeline-tag{background:#261f10dd;border:1px solid #8d7434;color:#f3d987;padding:7px 10px;border-radius:999px;font-size:12px}.story{padding:16px}.dialogue{background:linear-gradient(180deg,#f4e8c8,#dbc99f);color:#1c261f;border-radius:14px;padding:15px;border:2px solid #8f7a49;min-height:115px;box-shadow:inset 0 0 0 3px #ffffff33}.speaker{font-weight:900;color:#31583d;margin-bottom:5px}.dialogue p{margin:0;line-height:1.7}.choice-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.activity{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid #2b4d40;border-radius:13px;background:#0a1b15;margin-bottom:8px}.activity .meta{color:var(--muted);font-size:12px;margin-top:2px}.activity.active{border-color:#77a857;box-shadow:0 0 0 1px #77a85755 inset}.quest{padding:10px;border-left:3px solid #557966;background:#0a1915;margin-bottom:9px;border-radius:8px}.quest.done{border-left-color:var(--lime);opacity:.72}.quest b{display:block}.quest small{color:var(--muted)}.tabs{display:flex;gap:5px;padding:8px;background:#0a1814;border-bottom:1px solid var(--line);overflow:auto}.tab{border:0;background:transparent;color:#aac1b5;padding:8px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}.tab.active{background:#1b3b2f;color:white}.tab-pane{display:none}.tab-pane.active{display:block}.item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed #315144}.item:last-child{border-bottom:0}.icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#16372c;border:1px solid #3a6654;font-size:20px}.item b{display:block}.item small{color:var(--muted)}.log{max-height:305px;overflow:auto;font-size:12px}.log-row{padding:7px 0;border-bottom:1px dashed #29483d;color:#b9cec3}.log-row time{color:#6ea88b;margin-right:6px}.boss{margin-top:12px;background:#2a1715;border:1px solid #6d3d36;border-radius:14px;padding:12px}.boss-head{display:flex;justify-content:space-between;gap:10px}.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}.skills .btn{padding:8px 6px;font-size:12px}.footer-note{margin-top:14px;color:#789588;font-size:11px;text-align:center}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#f1e8c9;color:#172119;border:1px solid #8b7748;border-radius:12px;padding:10px 14px;opacity:0;pointer-events:none;transition:.2s;z-index:30;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.modal{position:fixed;inset:0;background:#000a;display:none;place-items:center;z-index:25;padding:16px}.modal.show{display:grid}.modal-box{max-width:650px;width:100%;background:#10271f;border:1px solid #426856;border-radius:18px;box-shadow:var(--shadow);padding:18px}.modal-box h3{margin-top:0}.modal-box textarea{width:100%;min-height:170px;background:#07110f;color:#e4f0e8;border:1px solid #355b4b;border-radius:12px;padding:10px}.kbd{padding:2px 5px;border:1px solid #537463;border-radius:5px;font-size:10px;color:#b7c9bf}.complete{padding:15px;border:1px solid #9e8747;background:linear-gradient(135deg,#3a3116,#1b281f);border-radius:14px;margin-top:12px}.complete b{color:#f1d774}.codex-entry{padding:10px;border-radius:12px;background:#0b1c17;border:1px solid #284b3c;margin-bottom:8px}.codex-entry.locked{filter:grayscale(1);opacity:.45}.codex-entry small{color:var(--muted)}
+@media(max-width:1050px){.layout{grid-template-columns:280px 1fr}.rightcol{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px}.rightcol>.card{min-width:0}}
+@media(max-width:760px){.app{padding:10px}.layout{display:block}.layout>.card,.rightcol>.card{margin-bottom:10px}.rightcol{display:block}.topbar{align-items:flex-start}.top-actions{justify-content:flex-end}.brand small{max-width:220px}.scene{min-height:250px}.scene svg{min-height:250px}.statgrid{grid-template-columns:repeat(4,1fr)}.stat{padding:8px}.stat b{font-size:15px}.skills{grid-template-columns:1fr}.scene-info{align-items:flex-start;flex-direction:column}.timeline-tag{align-self:flex-start}}
+@media(max-width:480px){.statgrid{grid-template-columns:1fr 1fr}.top-actions .btn{font-size:12px;padding:7px 8px}.brand h1{font-size:19px}.badge{width:40px;height:40px}.dialogue{font-size:14px}.scene-title b{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="badge">H×H</div>
+      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.1「離島之日」</small></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="saveBtn">儲存</button>
+      <button class="btn" id="exportBtn">匯出</button>
+      <button class="btn" id="importBtn">匯入</button>
+      <button class="btn danger" id="resetBtn">重來</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card leftcol">
+      <div class="card-head"><h3>小傑・富力士</h3><span class="chip" id="stageChip">鯨魚島</span></div>
+      <div class="card-body">
+        <div class="statgrid">
+          <div class="stat"><b id="levelText">Lv.1</b><span>等級</span><div class="bar"><div class="fill" id="expBar"></div></div></div>
+          <div class="stat"><b id="jennyText">0</b><span>戒尼</span></div>
+          <div class="stat"><b id="energyText">100/100</b><span>體力</span><div class="bar"><div class="fill energy" id="energyBar"></div></div></div>
+          <div class="stat"><b id="senseText">1</b><span>感知</span></div>
+        </div>
+        <div class="mini-title">成長能力</div>
+        <div class="chips">
+          <span class="chip">體魄 <b id="bodyText">1</b></span>
+          <span class="chip">意志 <b id="willText">1</b></span>
+          <span class="chip">釣技 <b id="fishText">1</b></span>
+          <span class="chip">羈絆 <b id="bondText">0</b></span>
+        </div>
+        <div class="mini-title">目前放置活動</div>
+        <div id="activityList"></div>
+        <div class="mini-title">主線目標</div>
+        <div id="questList"></div>
+      </div>
+    </section>
+
+    <section class="card centercol">
+      <div class="scene" id="sceneArt"></div>
+      <div class="story">
+        <div class="dialogue">
+          <div class="speaker" id="speaker">旁白</div>
+          <p id="dialogueText"></p>
+          <div class="choice-row" id="choices"></div>
+        </div>
+        <div id="bossArea"></div>
+        <div id="completeArea"></div>
+      </div>
+    </section>
+
+    <aside class="rightcol">
+      <section class="card">
+        <div class="tabs">
+          <button class="tab active" data-tab="bag">背包</button>
+          <button class="tab" data-tab="codex">人物誌</button>
+          <button class="tab" data-tab="timeline">時間線</button>
+        </div>
+        <div class="card-body tab-pane active" id="tab-bag"><div id="inventory"></div></div>
+        <div class="card-body tab-pane" id="tab-codex"><div id="codex"></div></div>
+        <div class="card-body tab-pane" id="tab-timeline"><div id="timeline"></div></div>
+      </section>
+      <section class="card" style="margin-top:14px">
+        <div class="card-head"><h3>旅程紀錄</h3><span class="kbd">自動存檔</span></div>
+        <div class="card-body log" id="log"></div>
+      </section>
+    </aside>
+  </main>
+  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。</div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="saveModal"><div class="modal-box"><h3 id="modalTitle">存檔資料</h3><textarea id="saveText"></textarea><div class="choice-row"><button class="btn primary" id="modalApply">套用匯入</button><button class="btn" id="modalCopy">複製</button><button class="btn" id="modalClose">關閉</button></div></div></div>
+
+<script>
+(() => {
+'use strict';
+const SAVE_KEY = 'hxh_gon_idle_v01';
+const VERSION = '0.1.0';
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const now=()=>Date.now();
+const fmt=n=>Math.floor(n).toLocaleString('zh-TW');
+
+const SCENES={
+  whale:{name:'鯨魚島・森林與沼澤',tag:'漫畫 #1｜2011 動畫 #1',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="s" x2="0" y2="1"><stop stop-color="#6db4a5"/><stop offset=".55" stop-color="#b7d28a"/><stop offset="1" stop-color="#1d4935"/></linearGradient><linearGradient id="w"><stop stop-color="#2d857b"/><stop offset="1" stop-color="#123e42"/></linearGradient></defs><rect width="900" height="360" fill="url(#s)"/><circle cx="735" cy="70" r="38" fill="#f2db8b" opacity=".8"/><path d="M0 190 Q130 130 260 194 T520 180 T900 175 V360 H0Z" fill="#1a5b3d"/><path d="M0 252 Q210 205 390 245 T900 226 V360 H0Z" fill="#10382c"/><ellipse cx="520" cy="305" rx="390" ry="84" fill="url(#w)"/><path d="M0 284 Q160 275 300 293 T590 282 T900 288" fill="none" stroke="#79b7a8" stroke-width="4" opacity=".6"/><g fill="#0b241b"><path d="M100 245l18-92 18 92z"/><rect x="112" y="213" width="10" height="75"/><path d="M160 260l28-125 26 125z"/><rect x="184" y="223" width="10" height="72"/><path d="M780 245l26-120 30 120z"/><rect x="803" y="205" width="10" height="83"/></g><g transform="translate(420 168)"><circle cx="20" cy="22" r="18" fill="#e8c69b"/><path d="M3 18 Q20-12 39 17 L34 3 27 14 18-2 12 13 4 4Z" fill="#162b1f"/><path d="M2 38 Q20 28 40 39 L53 102 Q20 120 -13 101Z" fill="#2c7f41"/><path d="M-5 56 Q-32 78 -44 115" stroke="#e8c69b" stroke-width="10" stroke-linecap="round"/><path d="M39 54 Q64 72 76 104" stroke="#e8c69b" stroke-width="10" stroke-linecap="round"/><path d="M-36 113 Q28 96 105 145" fill="none" stroke="#3c2e20" stroke-width="4"/><path d="M105 145 q30-10 51 4" fill="none" stroke="#c1d3c8" stroke-width="2"/></g><path d="M660 312 q32-47 70-6 q-20 2-28 22 q-17-15-42-16z" fill="#173326" opacity=".9"/></svg>`},
+  swamp:{name:'鯨魚島・沼澤深處',tag:'主線事件：沼澤之王',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#16302b"/><circle cx="690" cy="62" r="48" fill="#d6d08c" opacity=".35"/><path d="M0 180 Q100 140 200 180 T420 170 T700 177 T900 160 V360 H0Z" fill="#12291f"/><ellipse cx="455" cy="295" rx="480" ry="130" fill="#173b3c"/><g opacity=".8" fill="#254f3b"><circle cx="140" cy="270" r="31"/><circle cx="210" cy="320" r="46"/><circle cx="760" cy="280" r="37"/></g><path d="M290 300 q125-125 250-10 q85-45 150 12 q-55 5-91 49 H325q-18-31-35-51z" fill="#243b2a" stroke="#48624c" stroke-width="4"/><path d="M360 288 q72-92 154-26 q43 25 70 4 q-8 48-77 62 q-90 17-147-40z" fill="#334c32"/><circle cx="525" cy="273" r="7" fill="#e8d370"/><path d="M533 287 q31 9 50 1" fill="none" stroke="#101916" stroke-width="4"/><g transform="translate(160 155)"><circle cx="20" cy="22" r="18" fill="#e8c69b"/><path d="M3 18 Q20-12 39 17 L34 3 27 14 18-2 12 13 4 4Z" fill="#111f18"/><path d="M2 38 Q20 28 40 39 L53 102 Q20 120 -13 101Z" fill="#2c7f41"/><path d="M38 60 Q95 70 149 119" fill="none" stroke="#3c2e20" stroke-width="5"/><path d="M149 119 Q260 135 365 115" fill="none" stroke="#d7e5dc" stroke-width="2"/></g></svg>`},
+  dock:{name:'鯨魚島・碼頭',tag:'漫畫 #1｜離島',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sea" y2="1"><stop stop-color="#8bbfd0"/><stop offset="1" stop-color="#235b70"/></linearGradient></defs><rect width="900" height="360" fill="#9bcbd0"/><rect y="190" width="900" height="170" fill="url(#sea)"/><path d="M0 205 q80-25 160 0 t160 0 t160 0 t160 0 t160 0" fill="none" stroke="#d3ecec" stroke-width="5" opacity=".55"/><path d="M0 260 L350 236 L350 360 H0Z" fill="#5d452b"/><path d="M60 250v110M150 246v114M245 242v118" stroke="#2d251b" stroke-width="10"/><g transform="translate(650 122)"><path d="M-120 98 Q0 135 128 98 L98 154 H-80Z" fill="#4f3b2c"/><rect x="15" y="-35" width="8" height="140" fill="#43362b"/><path d="M23-30 L23 78 L110 55Z" fill="#eee5c5"/><path d="M14-20 L14 68 L-73 45Z" fill="#d6d2b7"/></g><g transform="translate(318 171)"><circle cx="18" cy="19" r="15" fill="#e8c69b"/><path d="M3 16Q20-10 36 15l-5-15-9 12-7-15-6 14-5-8z" fill="#14251b"/><path d="M4 34h30l11 64H-6z" fill="#2d7e43"/></g><g transform="translate(240 170)"><circle cx="18" cy="18" r="15" fill="#e1b98f"/><path d="M2 34h33l8 65H-7z" fill="#6d3d2e"/><path d="M0 12 q18-25 37 0" fill="#5a321f"/></g></svg>`},
+  ship:{name:'前往多雷港的船',tag:'漫畫 #2｜2011 動畫 #1',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#142a35"/><path d="M0 110 q90-70 180 0t180 0t180 0t180 0t180 0V0H0Z" fill="#263845"/><path d="M0 250 q90-45 180 0t180 0t180 0t180 0t180 0v110H0Z" fill="#173a50"/><path d="M0 274 q90-34 180 0t180 0t180 0t180 0t180 0" fill="none" stroke="#8cc7d2" stroke-width="5" opacity=".45"/><g transform="translate(450 128)"><path d="M-220 105 Q0 170 220 105 L178 185 H-170Z" fill="#4d392c"/><rect x="-8" y="-64" width="13" height="190" fill="#342c27"/><path d="M5-58V74L130 35Z" fill="#ded8bc"/><path d="M-8-44V62L-130 28Z" fill="#babca9"/></g><g fill="#e6edf0" opacity=".75"><path d="M88 63l35 8-31 10z"/><path d="M748 75l44 4-37 15z"/></g><g transform="translate(365 188)"><circle cx="15" cy="15" r="13" fill="#e8c69b"/><path d="M1 14q13-21 29 0l-4-14-7 10-6-12-5 11-4-6z" fill="#101d17"/><path d="M2 30h27l8 49H-6z" fill="#2d7f42"/></g><g transform="translate(452 188)"><circle cx="15" cy="15" r="13" fill="#d7b08d"/><path d="M0 30h30l7 49H-6z" fill="#516d79"/><path d="M0 8h30v6H0z" fill="#d6d6cf"/></g><g transform="translate(530 188)"><circle cx="15" cy="15" r="13" fill="#e0b590"/><path d="M0 30h30l7 49H-6z" fill="#8b724c"/><path d="M2 5q14-16 27 0" fill="#2d271f"/></g></svg>`},
+  port:{name:'航路終點・試驗之路',tag:'漫畫 #3–4｜初版終點',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#d9c48b"/><circle cx="720" cy="72" r="48" fill="#ffe5a2"/><path d="M0 195q120-80 250 2t250-8t400 0v171H0z" fill="#56734d"/><path d="M0 250q110-60 240 5t260-8t400-8v121H0z" fill="#2e4f3e"/><path d="M410 360 Q430 270 475 210 Q520 270 550 360Z" fill="#aa9264"/><g transform="translate(440 220)"><circle cx="15" cy="15" r="13" fill="#e8c69b"/><path d="M1 14q13-21 29 0l-4-14-7 10-6-12-5 11-4-6z" fill="#101d17"/><path d="M2 30h27l8 49H-6z" fill="#2d7f42"/></g><path d="M120 190l25-100 30 100zM770 190l25-110 34 110z" fill="#294a38"/></svg>`}
+};
+
+const defaultState=()=>({
+  version:VERSION, created:now(), lastTick:now(), stage:0, scene:'whale', level:1, exp:0, energy:100, maxEnergy:100, jenny:0,
+  stats:{sense:1,body:1,will:1,fish:1,bond:0},
+  res:{training:0,bait:0,herb:0,fish:0}, inventory:{rod:1}, activity:'train',
+  flags:{master:false,mito:false,depart:false,storm:false,metFriends:false,captain:false,complete:false},
+  boss:null, storyStep:0, logs:[], unlocked:['gon','mito'], playSeconds:0
+});
+let S=defaultState();
+
+const dialogues=[
+  {stage:0,speaker:'旁白',text:'鯨魚島的清晨。離獵人試驗出發日只剩不多時間。米特阿姨答應：只要你能釣起這座島上人人都知道的「沼澤之王」，她就不再阻止你離開。'},
+  {stage:1,speaker:'小傑',text:'水面很安靜……牠一定就在下面。先把感覺磨得更敏銳，再準備餌料。'},
+  {stage:2,speaker:'小傑',text:'就是現在！不是靠蠻力硬拉，得跟著牠的節奏。'},
+  {stage:3,speaker:'米特',text:'你真的做到了。你想追上金走過的路，我知道已經攔不住你了。至少答應我：無論走多遠，都別忘記這裡是你的家。'},
+  {stage:4,speaker:'旁白',text:'船離開鯨魚島後不久，海象急轉直下。多數乘客已經暈得站不起來，甲板上只剩少數人還能活動。'},
+  {stage:5,speaker:'雷歐力',text:'這點風浪算什麼……喂，小鬼，你居然還站得那麼穩？'},
+  {stage:6,speaker:'酷拉皮卡',text:'船長似乎不是普通的運輸船船長。他一直在觀察我們。'},
+  {stage:7,speaker:'船長',text:'你們三個，為什麼非得成為獵人不可？我不想聽漂亮話，只說你真正的理由。'},
+  {stage:8,speaker:'旁白',text:'船長接受了三人的答案，也給出了通往真正試驗會場的下一段線索。小傑的獵人之路，才剛剛開始。'}
+];
+
+function expNeed(){return 35+(S.level-1)*30}
+function gainExp(n){S.exp+=n; while(S.exp>=expNeed()){S.exp-=expNeed();S.level++;S.maxEnergy+=5;S.energy=S.maxEnergy; S.stats.body+=.5; addLog(`等級提升至 Lv.${S.level}，體魄有所成長。`); toast(`升級！Lv.${S.level}`)}}
+function addLog(msg){const t=new Date();S.logs.unshift({t:t.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}),msg});S.logs=S.logs.slice(0,80)}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1800)}
+function save(show=false){S.lastTick=now();localStorage.setItem(SAVE_KEY,JSON.stringify(S));if(show)toast('已儲存進度')}
+function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;const d=JSON.parse(raw);S={...defaultState(),...d,stats:{...defaultState().stats,...d.stats},res:{...defaultState().res,...d.res},inventory:{...defaultState().inventory,...d.inventory},flags:{...defaultState().flags,...d.flags}};const away=Math.min(8*3600,Math.max(0,(now()-(d.lastTick||now()))/1000));if(away>10){offlineGain(away);addLog(`離線 ${Math.floor(away/60)} 分鐘，已結算放置收益。`)}}catch(e){console.warn(e)}}
+function offlineGain(sec){const mult=.55; if(S.activity==='train'){S.res.training+=sec*.12*mult*(1+S.level*.04);gainExp(sec*.04*mult)} if(S.activity==='gather'){S.res.bait+=sec*.035*mult;S.res.herb+=sec*.018*mult} if(S.activity==='fish'){S.res.fish+=sec*.025*mult;S.jenny+=sec*.06*mult}}
+
+const activities=[
+  {id:'train',name:'森林修行',desc:'感知訓練 + 經驗',unlock:()=>S.stage<=3||S.flags.complete},
+  {id:'gather',name:'採集餌料',desc:'取得餌料與草藥',unlock:()=>S.stage<=3||S.flags.complete},
+  {id:'fish',name:'海邊釣魚',desc:'少量戒尼與魚獲',unlock:()=>S.flags.master}
+];
+
+function tick(dt){
+  S.playSeconds+=dt;
+  S.energy=clamp(S.energy+dt*(.55+S.level*.02),0,S.maxEnergy);
+  if(S.activity==='train'){S.res.training+=dt*.13*(1+S.level*.04);gainExp(dt*.045); if(S.res.training>=10 && S.stats.sense<2)S.stats.sense=2; if(S.res.training>=24 && S.stats.body<2)S.stats.body=2;}
+  if(S.activity==='gather'){S.res.bait+=dt*.038;S.res.herb+=dt*.018;}
+  if(S.activity==='fish'&&S.flags.master){S.res.fish+=dt*.025;S.jenny+=dt*.065;}
+  if(S.boss)bossTick(dt);
+  autoAdvance();
+}
+
+function autoAdvance(){
+  if(S.stage===0 && S.res.training>=4){S.stage=1;S.storyStep=1;addLog('你逐漸抓到沼澤周遭生物的動靜。')}
+  if(S.stage===1 && S.res.training>=12 && S.res.bait>=4){S.stage=2;S.scene='swamp';S.storyStep=2;addLog('條件已具備，可以挑戰沼澤之王。');toast('主線更新：挑戰沼澤之王')}
+  if(S.stage===4 && S.flags.storm){S.stage=5;S.storyStep=5;S.scene='ship';unlock('leorio');addLog('你撐過風暴，注意到另外兩名仍能行動的乘客。')}
+}
+function unlock(id){if(!S.unlocked.includes(id)){S.unlocked.push(id);toast('人物誌新增')}}
+
+function startMaster(){if(S.boss||S.flags.master)return;if(S.res.bait<4||S.res.training<12){toast('準備還不夠');return}S.res.bait-=4;S.boss={type:'master',hp:160,max:160,progress:0,focus:0,cool:0};S.energy=Math.max(20,S.energy-10);addLog('沼澤之王上鉤了！進入放置拉鋸。');render()}
+function startStorm(){if(S.boss||S.flags.storm)return;S.boss={type:'storm',hp:120,max:120,progress:0,focus:0,cool:0};addLog('風暴襲來。必須在甲板上保持平衡並幫忙處理繩索。');render()}
+function bossTick(dt){const b=S.boss;if(!b)return;b.cool=Math.max(0,b.cool-dt);if(b.type==='master'){
+  const dps=(1.4+S.stats.fish*.5+S.stats.body*.25)*(1+b.focus*.02); b.hp-=dps*dt;b.focus=Math.max(0,b.focus-dt*.35);S.energy=Math.max(0,S.energy-dt*.18);
+  if(S.energy<=0){addLog('體力耗盡，沼澤之王脫鉤了。');S.boss=null;S.energy=25;toast('失敗：先恢復體力');return}
+  if(b.hp<=0){S.boss=null;S.flags.master=true;S.stage=3;S.scene='dock';S.storyStep=3;S.stats.fish+=1;S.stats.will+=1;S.inventory.scale=(S.inventory.scale||0)+1;gainExp(28);unlock('kite');addLog('成功釣起沼澤之王。米特已經在碼頭等你。');toast('成功！沼澤之王')}
+ } else {
+   const dps=(1.5+S.stats.will*.65+S.stats.body*.3)*(1+b.focus*.018); b.hp-=dps*dt;S.energy=Math.max(0,S.energy-dt*.12);
+   if(S.energy<=0){S.boss=null;S.energy=25;addLog('你被浪打回船艙，休息後可以再試。');toast('體力不足');return}
+   if(b.hp<=0){S.boss=null;S.flags.storm=true;S.stats.will+=.8;gainExp(25);addLog('你穩穩撐過風暴，還幫船員固定了繩索。');toast('風暴事件完成')}
+ }
+}
+function skill(kind){const b=S.boss;if(!b||b.cool>0)return;
+ if(kind==='burst'){if(S.energy<9){toast('體力不足');return}S.energy-=9;b.hp-=18+S.stats.body*3;b.cool=.65;toast(b.type==='master'?'猛拉！':'抓緊繩索！')}
+ if(kind==='observe'){b.focus=Math.min(12,b.focus+4+S.stats.sense*.4);b.cool=.8;toast('節奏看清了')}
+ if(kind==='steady'){S.energy=Math.min(S.maxEnergy,S.energy+12);b.focus=Math.min(12,b.focus+1);b.cool=1.4;toast('穩住呼吸')}
+ render();
+}
+
+function storyAction(action){
+ if(action==='master')startMaster();
+ if(action==='mito'&&S.flags.master&&!S.flags.mito){S.flags.mito=true;S.stats.bond+=1;S.inventory.lunch=1;gainExp(12);S.stage=3;addLog('米特替你準備了旅途便當。');toast('獲得：米特的便當')}
+ if(action==='depart'&&S.flags.mito){S.flags.depart=true;S.stage=4;S.storyStep=4;S.scene='ship';S.activity='train';addLog('你向鯨魚島道別，登上前往試驗方向的船。');toast('離開鯨魚島')}
+ if(action==='storm')startStorm();
+ if(action==='meet'&&S.flags.storm){S.flags.metFriends=true;S.stage=6;S.storyStep=6;unlock('kurapika');unlock('leorio');S.stats.bond+=1;addLog('你與雷歐力、酷拉皮卡互相認識。')}
+ if(action==='captain'&&S.flags.metFriends){S.flags.captain=true;S.stage=7;S.storyStep=7;addLog('船長開始詢問三人的真正動機。')}
+ if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.1 主線完成。');toast('v0.1 主線完成！')}
+ save();render();
+}
+
+function getDialogue(){return dialogues.find(x=>x.stage===S.stage)||dialogues[dialogues.length-1]}
+function questData(){
+ return [
+  {name:'森林感知訓練',done:S.res.training>=12,desc:`訓練 ${Math.min(12,Math.floor(S.res.training))}/12`},
+  {name:'準備餌料',done:S.res.bait>=4||S.flags.master,desc:`餌料 ${S.flags.master?'完成':Math.min(4,Math.floor(S.res.bait))+'/4'}`},
+  {name:'釣起沼澤之王',done:S.flags.master,desc:S.flags.master?'已完成':'完成鯨魚島的約定'},
+  {name:'向米特道別',done:S.flags.mito,desc:S.flags.mito?'已完成':'取得離島許可'},
+  {name:'撐過船上風暴',done:S.flags.storm,desc:S.flags.storm?'已完成':'在前往試驗的船上證明自己'},
+  {name:'回答船長',done:S.flags.complete,desc:S.flags.complete?'初版完成':'說出成為獵人的真正理由'}
+ ];
+}
+
+function sceneHTML(){const sc=SCENES[S.scene]||SCENES.whale;return `${sc.svg}<div class="scene-info"><div class="scene-title"><b>${sc.name}</b><span>主角：小傑・富力士</span></div><div class="timeline-tag">${sc.tag}</div></div>`}
+function renderActivities(){document.getElementById('activityList').innerHTML=activities.filter(a=>a.unlock()).map(a=>`<div class="activity ${S.activity===a.id?'active':''}"><div><b>${a.name}</b><div class="meta">${a.desc}</div></div><button class="btn ${S.activity===a.id?'primary':''}" data-act="${a.id}">${S.activity===a.id?'進行中':'選擇'}</button></div>`).join('');document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{S.activity=b.dataset.act;addLog(`放置活動切換為「${activities.find(a=>a.id===S.activity).name}」。`);render()})}
+function renderQuests(){document.getElementById('questList').innerHTML=questData().map(q=>`<div class="quest ${q.done?'done':''}"><b>${q.done?'✓ ':''}${q.name}</b><small>${q.desc}</small></div>`).join('')}
+function renderDialogue(){const d=getDialogue();document.getElementById('speaker').textContent=d.speaker;document.getElementById('dialogueText').textContent=d.text;let buttons=[];
+ if(S.stage===2&&!S.flags.master)buttons.push(['master','開始放置拉鋸','gold']);
+ if(S.stage===3&&S.flags.master&&!S.flags.mito)buttons.push(['mito','把成果帶給米特','primary']);
+ if(S.stage===3&&S.flags.mito&&!S.flags.depart)buttons.push(['depart','登船離開鯨魚島','gold']);
+ if(S.stage===4&&!S.flags.storm)buttons.push(['storm','迎戰風暴','primary']);
+ if(S.stage===5&&S.flags.storm&&!S.flags.metFriends)buttons.push(['meet','和另外兩人交談','primary']);
+ if(S.stage===6&&S.flags.metFriends&&!S.flags.captain)buttons.push(['captain','注意船長的試探','primary']);
+ if(S.stage===7&&S.flags.captain&&!S.flags.complete)buttons.push(['answer','「我要找到金，也想知道獵人究竟是什麼。」','gold']);
+ if(S.stage<2)buttons.push(['hint',S.res.training<12?'繼續放置修行':'切換採集餌料','']);
+ document.getElementById('choices').innerHTML=buttons.map(([a,t,c])=>`<button class="btn ${c}" data-story="${a}">${t}</button>`).join('');document.querySelectorAll('[data-story]').forEach(b=>b.onclick=()=>b.dataset.story==='hint'?toast(S.res.training<12?'選擇「森林修行」累積訓練。':'選擇「採集餌料」準備上鉤。'):storyAction(b.dataset.story));
+}
+function renderBoss(){const el=document.getElementById('bossArea');if(!S.boss){el.innerHTML='';return}const b=S.boss;const name=b.type==='master'?'沼澤之王・拉鋸戰':'風暴・甲板生存';const pct=clamp(100-b.hp/b.max*100,0,100);el.innerHTML=`<div class="boss"><div class="boss-head"><b>${name}</b><span>${Math.max(0,Math.ceil(b.hp))}/${b.max}</span></div><div class="bar"><div class="fill red" style="width:${100-pct}%"></div></div><div style="font-size:12px;color:#d9bcb7;margin-top:6px">自動進行中 · 專注 ${b.focus.toFixed(1)}</div><div class="skills"><button class="btn" data-skill="burst">${b.type==='master'?'猛拉魚竿':'固定繩索'} (-9 體力)</button><button class="btn" data-skill="observe">觀察節奏</button><button class="btn" data-skill="steady">穩住呼吸 (+體力)</button></div></div>`;document.querySelectorAll('[data-skill]').forEach(x=>x.onclick=()=>skill(x.dataset.skill))}
+function renderInventory(){const items=[];if(S.inventory.rod)items.push(['🎣','小傑的釣竿','從鯨魚島一路帶在身邊的工具。','×1']);if(S.res.bait>=.1)items.push(['🪱','餌料','在森林與岸邊採集。',`×${Math.floor(S.res.bait)}`]);if(S.res.herb>=.1)items.push(['🌿','島上草藥','可在後續版本製作恢復道具。',`×${Math.floor(S.res.herb)}`]);if(S.res.fish>=.1)items.push(['🐟','魚獲','可換取少量戒尼。',`×${Math.floor(S.res.fish)}`]);if(S.inventory.scale)items.push(['🐉','沼澤之王的鱗片','紀念性道具，代表你完成與米特的約定。','×1']);if(S.inventory.lunch)items.push(['🍱','米特的便當','離島前準備的便當。','×1']);if(S.inventory.route)items.push(['🧭','試驗會場線索','船長認可後提供的路線提示。','×1']);document.getElementById('inventory').innerHTML=items.map(i=>`<div class="item"><div class="icon">${i[0]}</div><div style="flex:1"><b>${i[1]}</b><small>${i[2]}</small></div><b>${i[3]}</b></div>`).join('')||'<small>背包目前是空的。</small>'}
+function renderCodex(){const data=[
+ ['gon','小傑・富力士','鯨魚島長大的少年。目標是成為獵人並找到父親金。'],
+ ['mito','米特','撫養小傑長大的家人。嘴上嚴格，但十分在乎小傑。'],
+ ['kite','凱特','曾在鯨魚島讓小傑知道金仍然活著，也讓「獵人」成為具體目標。'],
+ ['leorio','雷歐力','在前往獵人試驗的船上相遇。直率、好強，有自己的現實目標。'],
+ ['kurapika','酷拉皮卡','同船的試驗參加者。冷靜、知識豐富，背負著自己的目的。']
+ ];document.getElementById('codex').innerHTML=data.map(x=>{const on=S.unlocked.includes(x[0]);return `<div class="codex-entry ${on?'':'locked'}"><b>${on?x[1]:'？？？'}</b><br><small>${on?x[2]:'隨主線推進解鎖'}</small></div>`}).join('')}
+function renderTimeline(){const rows=[
+ ['✓','鯨魚島：沼澤之王','漫畫第 1 話 / 2011 動畫第 1 集',S.flags.master],
+ ['→','離開鯨魚島','漫畫第 1 話',S.flags.depart],
+ ['→','船上風暴與相遇','漫畫第 2 話 / 2011 動畫第 1 集',S.flags.metFriends],
+ ['→','船長的初步試探','漫畫第 2 話',S.flags.complete],
+ ['○','多雷港後的試驗路線','漫畫第 3–4 話',false],
+ ['○','287 期獵人試驗','漫畫第 5 話起',false]
+ ];document.getElementById('timeline').innerHTML=rows.map(r=>`<div class="item"><div class="icon">${r[3]?'✓':r[0]}</div><div><b>${r[1]}</b><small>${r[2]}${r[3]?' · 已完成':''}</small></div></div>`).join('')+'<small style="display:block;margin-top:10px;color:#819d90">初版以漫畫事件順序為主；年份精確日期在不同資料整理中存在差異，因此遊戲內先不鎖定到單一日。</small>'}
+function renderLogs(){document.getElementById('log').innerHTML=S.logs.map(l=>`<div class="log-row"><time>${l.t}</time>${l.msg}</div>`).join('')||'<div class="log-row">旅程才剛開始。</div>'}
+function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.1「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一版建議：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場 → 第一關薩茨長跑。你的存檔可直接沿用。</div></div>`:''}
+function renderStats(){document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/expNeed()*100)+'%';document.getElementById('stageChip').textContent=(SCENES[S.scene]||SCENES.whale).name.split('・')[0]}
+function render(){renderStats();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.tab-pane').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t.dataset.tab).classList.add('active')});
+// save controls
+document.getElementById('saveBtn').onclick=()=>save(true);
+const modal=document.getElementById('saveModal'), txt=document.getElementById('saveText'), apply=document.getElementById('modalApply');
+document.getElementById('exportBtn').onclick=()=>{save();document.getElementById('modalTitle').textContent='匯出存檔';txt.value=btoa(unescape(encodeURIComponent(JSON.stringify(S))));apply.style.display='none';modal.classList.add('show')};
+document.getElementById('importBtn').onclick=()=>{document.getElementById('modalTitle').textContent='匯入存檔';txt.value='';apply.style.display='inline-block';modal.classList.add('show')};
+document.getElementById('modalClose').onclick=()=>modal.classList.remove('show');document.getElementById('modalCopy').onclick=async()=>{try{await navigator.clipboard.writeText(txt.value);toast('已複製')}catch{txt.select();document.execCommand('copy');toast('已複製')}};
+apply.onclick=()=>{try{const d=JSON.parse(decodeURIComponent(escape(atob(txt.value.trim()))));localStorage.setItem(SAVE_KEY,JSON.stringify(d));load();modal.classList.remove('show');toast('匯入成功');render()}catch(e){toast('匯入失敗：存檔格式錯誤')}};
+document.getElementById('resetBtn').onclick=()=>{if(confirm('確定刪除目前進度並重新開始？')){localStorage.removeItem(SAVE_KEY);S=defaultState();addLog('新的旅程開始。');save();render()}};
+
+load();if(!S.logs.length)addLog('清晨的鯨魚島，新的旅程開始。');render();
+let last=performance.now(), acc=0;function loop(t){const dt=Math.min(.25,(t-last)/1000);last=t;tick(dt);acc+=dt;if(acc>.35){render();acc=0}requestAnimationFrame(loop)}requestAnimationFrame(loop);setInterval(()=>save(false),5000);
+})();
+</script>
+</body>
+</html>
