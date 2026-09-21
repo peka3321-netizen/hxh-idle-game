@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>獵人編年史：小傑篇 v0.3.0</title>
+<title>獵人編年史：小傑篇 v0.4.0</title>
 <meta name="description" content="非官方 HUNTER×HUNTER 同人放置遊戲初始版，以小傑的故事時間線為主。" />
 <style>
 :root{
@@ -104,6 +104,22 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 @media(max-width:760px){.topbar{position:static;padding:14px}.status-strip{grid-template-columns:1fr 1fr}.profile-hero{grid-template-columns:76px 1fr}.profile-avatar{width:76px;height:76px}.profile-avatar-core{width:62px;height:62px;font-size:16px}.profile-name{font-size:19px}.profile-metrics{grid-template-columns:1fr}.scene{min-height:280px}.scene svg{min-height:280px}.objective-banner{display:block}.objective-side{margin-top:10px;min-width:0}.layout{display:block}.rightcol{display:block}}
 @media(max-width:480px){.app{padding:10px}.status-strip{grid-template-columns:1fr}.top-actions{width:100%;justify-content:flex-start}.brand{align-items:flex-start}.profile-hero{grid-template-columns:1fr}.profile-avatar{margin:auto}.statgrid{grid-template-columns:1fr 1fr}.current-activity-time{font-size:18px}.scene-title b{font-size:18px}.objective-main b{font-size:16px}}
 
+
+/* v0.4 chapter roadmap */
+.chapter-track{display:grid;grid-template-columns:auto 1fr auto 1fr auto 1fr auto;align-items:center;gap:10px;margin:0 0 16px;padding:12px 14px;border:1px solid #315848;border-radius:18px;background:linear-gradient(180deg,#0e201ae8,#091512d9);box-shadow:0 12px 30px #0004}
+.chapter-node{display:flex;align-items:center;gap:9px;min-width:0;opacity:.48;transition:.2s ease}
+.chapter-node>span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid #3d6856;background:#0a1713;font-size:11px;font-weight:900;color:#8fa99c;flex:0 0 auto}
+.chapter-node b{display:block;font-size:12px;color:#d9e7df;white-space:nowrap}.chapter-node small{display:block;font-size:9px;color:#809c8e;white-space:nowrap}
+.chapter-node.active,.chapter-node.done{opacity:1}.chapter-node.active>span{border-color:#b8ef6f;color:#f3ffd9;box-shadow:0 0 0 5px #b8ef6f12,0 0 18px #b8ef6f22;background:#193526}.chapter-node.done>span{border-color:#6ab07a;color:#dff7df;background:#173323}.chapter-node.done>span::after{content:"✓";position:absolute}.chapter-node.done>span{font-size:0;position:relative}.chapter-node.done>span::after{font-size:13px}
+.chapter-line{height:2px;background:linear-gradient(90deg,#294a3d,#3f6655);border-radius:999px}
+.chapter-line.done{background:linear-gradient(90deg,#67a574,#b8ef6f)}
+.quiz-panel{margin-top:12px;padding:14px;border-radius:16px;border:1px solid #6b5f36;background:linear-gradient(180deg,#2b2718,#171a13)}
+.quiz-panel b{color:#f5dda0}.quiz-panel small{display:block;color:#b8b7a3;margin-top:5px;line-height:1.5}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.quiz-options .btn{min-height:48px}
+.trial-hint{font-size:11px;color:#bcd3c6;margin-top:7px;padding:8px 9px;border:1px dashed #3a5d4e;border-radius:10px;background:#091612}
+@media(max-width:900px){.chapter-track{grid-template-columns:1fr 1fr}.chapter-line{display:none}.chapter-node{padding:7px;border-radius:12px;background:#0a1713}}
+@media(max-width:560px){.chapter-track{grid-template-columns:1fr}.quiz-options{grid-template-columns:1fr}.chapter-node small{white-space:normal}}
+
 </style>
 </head>
 <body>
@@ -111,7 +127,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
   <header class="topbar">
     <div class="brand">
       <div class="badge">H×H</div>
-      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.3.0「面板美術優化」</small></div>
+      <div><h1>獵人編年史：小傑篇</h1><small>非官方同人放置 RPG · v0.4.0「試驗前哨」</small></div>
     </div>
     <div class="top-actions">
       <button class="btn" id="saveBtn">儲存</button>
@@ -126,6 +142,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
     <div class="status-pill"><span>⏱ 遊玩時間</span><b id="playTimeText">0 分</b></div>
     <div class="status-pill"><span>🌙 離線上限</span><b>72 小時</b></div>
     <div class="status-pill"><span><i class="pulse-dot"></i>存檔</span><b>每 5 秒自動儲存</b></div>
+  </div>
+
+  <div class="chapter-track" aria-label="主線章節進度">
+    <div class="chapter-node" id="chapter-whale"><span>01</span><div><b>鯨魚島</b><small>出發的約定</small></div></div>
+    <div class="chapter-line"></div>
+    <div class="chapter-node" id="chapter-ship"><span>02</span><div><b>航海</b><small>風暴與相遇</small></div></div>
+    <div class="chapter-line"></div>
+    <div class="chapter-node" id="chapter-preexam"><span>03</span><div><b>試驗前哨</b><small>多雷港與導航員</small></div></div>
+    <div class="chapter-line"></div>
+    <div class="chapter-node" id="chapter-exam"><span>04</span><div><b>試驗會場</b><small>287 期獵人試驗</small></div></div>
   </div>
 
   <main class="layout">
@@ -230,7 +256,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
       </section>
     </aside>
   </main>
-  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。v0.3 針對面板視覺、資訊層級與行動導引進一步優化。</div>
+  <div class="footer-note">本作為非官方、非商業同人原型。劇情為依原作事件順序重新撰寫的遊戲文本；介面與插畫均為本頁自製 SVG/CSS。v0.4 新增多雷港、二選一問答、凶狸狐導航員試煉與獵人試驗入口。</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -241,7 +267,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 (() => {
 'use strict';
 const SAVE_KEY = 'hxh_gon_idle_v01';
-const VERSION = '0.3.0';
+const VERSION = '0.4.0';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const now=()=>Date.now();
 const fmt=n=>Math.floor(n).toLocaleString('zh-TW');
@@ -251,14 +277,18 @@ const SCENES={
   swamp:{name:'鯨魚島・沼澤深處',tag:'主線事件：沼澤之王',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#16302b"/><circle cx="690" cy="62" r="48" fill="#d6d08c" opacity=".35"/><path d="M0 180 Q100 140 200 180 T420 170 T700 177 T900 160 V360 H0Z" fill="#12291f"/><ellipse cx="455" cy="295" rx="480" ry="130" fill="#173b3c"/><g opacity=".8" fill="#254f3b"><circle cx="140" cy="270" r="31"/><circle cx="210" cy="320" r="46"/><circle cx="760" cy="280" r="37"/></g><path d="M290 300 q125-125 250-10 q85-45 150 12 q-55 5-91 49 H325q-18-31-35-51z" fill="#243b2a" stroke="#48624c" stroke-width="4"/><path d="M360 288 q72-92 154-26 q43 25 70 4 q-8 48-77 62 q-90 17-147-40z" fill="#334c32"/><circle cx="525" cy="273" r="7" fill="#e8d370"/><path d="M533 287 q31 9 50 1" fill="none" stroke="#101916" stroke-width="4"/><g transform="translate(160 155)"><circle cx="20" cy="22" r="18" fill="#e8c69b"/><path d="M3 18 Q20-12 39 17 L34 3 27 14 18-2 12 13 4 4Z" fill="#111f18"/><path d="M2 38 Q20 28 40 39 L53 102 Q20 120 -13 101Z" fill="#2c7f41"/><path d="M38 60 Q95 70 149 119" fill="none" stroke="#3c2e20" stroke-width="5"/><path d="M149 119 Q260 135 365 115" fill="none" stroke="#d7e5dc" stroke-width="2"/></g></svg>`},
   dock:{name:'鯨魚島・碼頭',tag:'漫畫 #1｜離島',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sea" y2="1"><stop stop-color="#8bbfd0"/><stop offset="1" stop-color="#235b70"/></linearGradient></defs><rect width="900" height="360" fill="#9bcbd0"/><rect y="190" width="900" height="170" fill="url(#sea)"/><path d="M0 205 q80-25 160 0 t160 0 t160 0 t160 0 t160 0" fill="none" stroke="#d3ecec" stroke-width="5" opacity=".55"/><path d="M0 260 L350 236 L350 360 H0Z" fill="#5d452b"/><path d="M60 250v110M150 246v114M245 242v118" stroke="#2d251b" stroke-width="10"/><g transform="translate(650 122)"><path d="M-120 98 Q0 135 128 98 L98 154 H-80Z" fill="#4f3b2c"/><rect x="15" y="-35" width="8" height="140" fill="#43362b"/><path d="M23-30 L23 78 L110 55Z" fill="#eee5c5"/><path d="M14-20 L14 68 L-73 45Z" fill="#d6d2b7"/></g><g transform="translate(318 171)"><circle cx="18" cy="19" r="15" fill="#e8c69b"/><path d="M3 16Q20-10 36 15l-5-15-9 12-7-15-6 14-5-8z" fill="#14251b"/><path d="M4 34h30l11 64H-6z" fill="#2d7e43"/></g><g transform="translate(240 170)"><circle cx="18" cy="18" r="15" fill="#e1b98f"/><path d="M2 34h33l8 65H-7z" fill="#6d3d2e"/><path d="M0 12 q18-25 37 0" fill="#5a321f"/></g></svg>`},
   ship:{name:'前往多雷港的船',tag:'漫畫 #2｜2011 動畫 #1',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#142a35"/><path d="M0 110 q90-70 180 0t180 0t180 0t180 0t180 0V0H0Z" fill="#263845"/><path d="M0 250 q90-45 180 0t180 0t180 0t180 0t180 0v110H0Z" fill="#173a50"/><path d="M0 274 q90-34 180 0t180 0t180 0t180 0t180 0" fill="none" stroke="#8cc7d2" stroke-width="5" opacity=".45"/><g transform="translate(450 128)"><path d="M-220 105 Q0 170 220 105 L178 185 H-170Z" fill="#4d392c"/><rect x="-8" y="-64" width="13" height="190" fill="#342c27"/><path d="M5-58V74L130 35Z" fill="#ded8bc"/><path d="M-8-44V62L-130 28Z" fill="#babca9"/></g><g fill="#e6edf0" opacity=".75"><path d="M88 63l35 8-31 10z"/><path d="M748 75l44 4-37 15z"/></g><g transform="translate(365 188)"><circle cx="15" cy="15" r="13" fill="#e8c69b"/><path d="M1 14q13-21 29 0l-4-14-7 10-6-12-5 11-4-6z" fill="#101d17"/><path d="M2 30h27l8 49H-6z" fill="#2d7f42"/></g><g transform="translate(452 188)"><circle cx="15" cy="15" r="13" fill="#d7b08d"/><path d="M0 30h30l7 49H-6z" fill="#516d79"/><path d="M0 8h30v6H0z" fill="#d6d6cf"/></g><g transform="translate(530 188)"><circle cx="15" cy="15" r="13" fill="#e0b590"/><path d="M0 30h30l7 49H-6z" fill="#8b724c"/><path d="M2 5q14-16 27 0" fill="#2d271f"/></g></svg>`},
-  port:{name:'航路終點・試驗之路',tag:'漫畫 #3–4｜初版終點',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#d9c48b"/><circle cx="720" cy="72" r="48" fill="#ffe5a2"/><path d="M0 195q120-80 250 2t250-8t400 0v171H0z" fill="#56734d"/><path d="M0 250q110-60 240 5t260-8t400-8v121H0z" fill="#2e4f3e"/><path d="M410 360 Q430 270 475 210 Q520 270 550 360Z" fill="#aa9264"/><g transform="translate(440 220)"><circle cx="15" cy="15" r="13" fill="#e8c69b"/><path d="M1 14q13-21 29 0l-4-14-7 10-6-12-5 11-4-6z" fill="#101d17"/><path d="M2 30h27l8 49H-6z" fill="#2d7f42"/></g><path d="M120 190l25-100 30 100zM770 190l25-110 34 110z" fill="#294a38"/></svg>`}
+  port:{name:'航路終點・多雷港外圍',tag:'漫畫 #3｜試驗前置',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#d9c48b"/><circle cx="720" cy="72" r="48" fill="#ffe5a2"/><path d="M0 195q120-80 250 2t250-8t400 0v171H0z" fill="#56734d"/><path d="M0 250q110-60 240 5t260-8t400-8v121H0z" fill="#2e4f3e"/><path d="M410 360 Q430 270 475 210 Q520 270 550 360Z" fill="#aa9264"/><g transform="translate(440 220)"><circle cx="15" cy="15" r="13" fill="#e8c69b"/><path d="M1 14q13-21 29 0l-4-14-7 10-6-12-5 11-4-6z" fill="#101d17"/><path d="M2 30h27l8 49H-6z" fill="#2d7f42"/></g><path d="M120 190l25-100 30 100zM770 190l25-110 34 110z" fill="#294a38"/></svg>`},
+  dolle:{name:'多雷港・港町',tag:'漫畫 #3｜2011 動畫 #2',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh" y2="1"><stop stop-color="#9bc5c3"/><stop offset="1" stop-color="#315f67"/></linearGradient></defs><rect width="900" height="360" fill="url(#dh)"/><rect y="230" width="900" height="130" fill="#5d5945"/><g fill="#d9cba7" stroke="#6b624f" stroke-width="3"><path d="M35 130h165v105H35z"/><path d="M250 105h180v130H250z"/><path d="M690 120h170v115H690z"/></g><g fill="#6d4c3d"><path d="M20 130l100-65 100 65z"/><path d="M225 105l115-72 115 72z"/><path d="M670 120l105-68 105 68z"/></g><path d="M455 230q70-145 140-105q42 24 70 105z" fill="#3f674b"/><path d="M566 126l17-75 18 75z" fill="#214934"/><g transform="translate(470 230)"><circle cx="12" cy="10" r="10" fill="#e8c69b"/><path d="M2 20h20l5 38H-3z" fill="#2d7f42"/></g><g transform="translate(520 230)"><circle cx="12" cy="10" r="10" fill="#deb58f"/><path d="M2 20h20l5 38H-3z" fill="#766044"/></g><g transform="translate(570 230)"><circle cx="12" cy="10" r="10" fill="#d9b28c"/><path d="M2 20h20l5 38H-3z" fill="#576f7c"/></g></svg>`},
+  quiz:{name:'多雷港・封鎖小巷',tag:'漫畫 #3｜二選一問答',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#2a302d"/><path d="M0 60h280v300H0zM620 40h280v320H620z" fill="#4a4d43"/><path d="M280 360L390 0h130l100 360z" fill="#706d58"/><circle cx="450" cy="128" r="40" fill="#d8c5a8"/><path d="M405 152q45-32 90 0l25 112H382z" fill="#4c3a54"/><path d="M405 124q45-62 90 0" fill="none" stroke="#e4e0d0" stroke-width="18"/><g fill="#1d2220"><circle cx="330" cy="190" r="24"/><circle cx="570" cy="190" r="24"/></g><g fill="#ece9d6"><path d="M318 184h24v12h-24z"/><path d="M558 184h24v12h-24z"/></g></svg>`},
+  pine:{name:'一本杉・導航員之森',tag:'漫畫 #4｜凶狸狐',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pn" y2="1"><stop stop-color="#253d42"/><stop offset="1" stop-color="#0c1a18"/></linearGradient></defs><rect width="900" height="360" fill="url(#pn)"/><circle cx="720" cy="58" r="34" fill="#e8db9c" opacity=".75"/><g fill="#143325"><path d="M90 300l70-260 70 260z"/><path d="M650 300l80-280 80 280z"/><path d="M250 315l58-210 58 210z"/></g><rect x="430" y="205" width="170" height="110" rx="3" fill="#6b5138"/><path d="M405 205l110-82 110 82z" fill="#41352a"/><rect x="492" y="246" width="42" height="69" fill="#2f271f"/><path d="M365 265q35-55 70-4q-24 4-34 30q-15-20-36-26z" fill="#7e6940"/><circle cx="400" cy="260" r="5" fill="#d8cf6e"/></svg>`},
+  exam:{name:'獵人試驗・秘密會場入口',tag:'漫畫 #4→#5｜287 期試驗',svg:`<svg viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="360" fill="#192421"/><rect x="80" y="55" width="740" height="305" rx="10" fill="#6b6654"/><rect x="122" y="95" width="656" height="265" fill="#2c3430"/><rect x="355" y="142" width="190" height="218" fill="#111816"/><path d="M355 142h190l-22-35H378z" fill="#9d8f61"/><circle cx="450" cy="205" r="34" fill="#202a25" stroke="#b8ef6f" stroke-width="3"/><text x="450" y="214" text-anchor="middle" fill="#dff4a5" font-size="24" font-family="sans-serif" font-weight="800">H×H</text><g fill="#222d29"><circle cx="240" cy="276" r="18"/><circle cx="285" cy="276" r="18"/><circle cx="610" cy="276" r="18"/><circle cx="655" cy="276" r="18"/></g></svg>`}
 };
 
 const defaultState=()=>({
   version:VERSION, created:now(), lastTick:now(), stage:0, scene:'whale', level:1, exp:0, energy:100, maxEnergy:100, jenny:0,
   stats:{sense:1,body:1,will:1,fish:1,bond:0},
   res:{training:0,bait:0,herb:0,fish:0}, inventory:{rod:1}, activity:'train', activityProgress:0, completedCycles:0,
-  flags:{master:false,mito:false,depart:false,storm:false,metFriends:false,captain:false,complete:false},
+  flags:{master:false,mito:false,depart:false,storm:false,metFriends:false,captain:false,complete:false,dolle:false,quiz:false,kiriko:false,examHall:false},
   boss:null, storyStep:0, logs:[], unlocked:['gon','mito'], playSeconds:0
 });
 let S=defaultState(), offlineReport=null;
@@ -272,7 +302,13 @@ const dialogues=[
   {stage:5,speaker:'雷歐力',text:'這點風浪算什麼……喂，小鬼，你居然還站得那麼穩？'},
   {stage:6,speaker:'酷拉皮卡',text:'船長似乎不是普通的運輸船船長。他一直在觀察我們。'},
   {stage:7,speaker:'船長',text:'你們三個，為什麼非得成為獵人不可？我不想聽漂亮話，只說你真正的理由。'},
-  {stage:8,speaker:'旁白',text:'船長接受了三人的答案，也給出了通往真正試驗會場的下一段線索。小傑的獵人之路，才剛剛開始。'}
+  {stage:8,speaker:'旁白',text:'船長接受了三人的答案，也給出了通往真正試驗會場的下一段線索。港口已經出現在前方。'},
+  {stage:9,speaker:'小傑',text:'這裡就是多雷港。船長說過，真正的路線不是跟著人群走，而是往山上的一本杉方向找線索。'},
+  {stage:10,speaker:'老婆婆',text:'想從這條路前進，就回答我的問題。只能在兩個答案裡選一個，而且只有五秒。'},
+  {stage:11,speaker:'酷拉皮卡',text:'沉默才是正確答案。這種題目根本不存在唯一正解；真正要測的是我們能不能看穿問題本身。'},
+  {stage:12,speaker:'旁白',text:'一本杉下的小屋看似遭到魔獸襲擊。小傑追了出去，卻逐漸察覺眼前的凶狸狐似乎一直在交換位置。'},
+  {stage:13,speaker:'凶狸狐導航員',text:'你們通過了。感知、判斷與對同伴的態度都合格。接下來由我們送你們到真正的獵人試驗會場。'},
+  {stage:14,speaker:'旁白',text:'秘密入口打開，地下聚集著大量考生。287 期獵人試驗即將正式開始。下一階段，會遇見更多真正的競爭者。'}
 ];
 
 function expNeed(){return 35+(S.level-1)*30}
@@ -316,23 +352,27 @@ function unlock(id){if(!S.unlocked.includes(id)){S.unlocked.push(id);toast('人�
 
 function startMaster(){if(S.boss||S.flags.master)return;if(S.res.bait<4||S.res.training<12){toast('準備還不夠');return}S.res.bait-=4;S.boss={type:'master',hp:160,max:160,progress:0,focus:0,cool:0};S.energy=Math.max(20,S.energy-10);addLog('沼澤之王上鉤了！進入放置拉鋸。');render()}
 function startStorm(){if(S.boss||S.flags.storm)return;S.boss={type:'storm',hp:120,max:120,progress:0,focus:0,cool:0};addLog('風暴襲來。必須在甲板上保持平衡並幫忙處理繩索。');render()}
+function startKiriko(){if(S.boss||S.flags.kiriko)return;S.stage=12;S.scene='pine';S.boss={type:'kiriko',hp:150,max:150,progress:0,focus:2,cool:0};addLog('凶狸狐試煉開始：追蹤氣味、動作與交換身分時留下的細節。');toast('導航員試煉開始');render()}
 function bossTick(dt){const b=S.boss;if(!b)return;b.cool=Math.max(0,b.cool-dt);if(b.type==='master'){
   const dps=(1.4+S.stats.fish*.5+S.stats.body*.25)*(1+b.focus*.02); b.hp-=dps*dt;b.focus=Math.max(0,b.focus-dt*.35);S.energy=Math.max(0,S.energy-dt*.18);
   if(S.energy<=0){addLog('體力耗盡，沼澤之王脫鉤了。');S.boss=null;S.energy=25;toast('失敗：先恢復體力');return}
   if(b.hp<=0){S.boss=null;S.flags.master=true;S.stage=3;S.scene='dock';S.storyStep=3;S.stats.fish+=1;S.stats.will+=1;S.inventory.scale=(S.inventory.scale||0)+1;gainExp(28);unlock('kite');addLog('成功釣起沼澤之王。米特已經在碼頭等你。');toast('成功！沼澤之王')}
- } else {
+ } else if(b.type==='storm') {
    const dps=(1.5+S.stats.will*.65+S.stats.body*.3)*(1+b.focus*.018); b.hp-=dps*dt;S.energy=Math.max(0,S.energy-dt*.12);
    if(S.energy<=0){S.boss=null;S.energy=25;addLog('你被浪打回船艙，休息後可以再試。');toast('體力不足');return}
    if(b.hp<=0){S.boss=null;S.flags.storm=true;S.stats.will+=.8;gainExp(25);addLog('你穩穩撐過風暴，還幫船員固定了繩索。');toast('風暴事件完成')}
+ } else if(b.type==='kiriko') {
+   const dps=(1.6+S.stats.sense*.62+S.stats.will*.24)*(1+b.focus*.028);b.hp-=dps*dt;b.focus=Math.max(0,b.focus-dt*.22);S.energy=Math.max(0,S.energy-dt*.06);
+   if(S.energy<=0){S.boss=null;S.stage=11;S.energy=30;addLog('追蹤太久失去集中力。整理線索後可以重新挑戰。');toast('失去目標：可再次挑戰');return}
+   if(b.hp<=0){S.boss=null;S.flags.kiriko=true;S.stage=13;S.scene='pine';S.stats.sense+=1;S.stats.will+=.4;gainExp(32);unlock('kiriko');addLog('你察覺凶狸狐交換身分的破綻，導航員一家正式認可三人。');toast('通過凶狸狐試煉！')}
  }
 }
 function skill(kind){const b=S.boss;if(!b||b.cool>0)return;
- if(kind==='burst'){if(S.energy<9){toast('體力不足');return}S.energy-=9;b.hp-=18+S.stats.body*3;b.cool=.65;toast(b.type==='master'?'猛拉！':'抓緊繩索！')}
- if(kind==='observe'){b.focus=Math.min(12,b.focus+4+S.stats.sense*.4);b.cool=.8;toast('節奏看清了')}
+ if(kind==='burst'){if(S.energy<9){toast('體力不足');return}S.energy-=9;b.hp-=18+S.stats.body*3;b.cool=.65;toast(b.type==='master'?'猛拉！':b.type==='kiriko'?'追上去！':'抓緊繩索！')}
+ if(kind==='observe'){b.focus=Math.min(12,b.focus+4+S.stats.sense*.4);b.cool=.8;toast(b.type==='kiriko'?'發現細節':'節奏看清了')}
  if(kind==='steady'){S.energy=Math.min(S.maxEnergy,S.energy+12);b.focus=Math.min(12,b.focus+1);b.cool=1.4;toast('穩住呼吸')}
  render();
 }
-
 function storyAction(action){
  if(action==='master')startMaster();
  if(action==='mito'&&S.flags.master&&!S.flags.mito){S.flags.mito=true;S.stats.bond+=1;S.inventory.lunch=1;gainExp(12);S.stage=3;addLog('米特替你準備了旅途便當。');toast('獲得：米特的便當')}
@@ -340,7 +380,13 @@ function storyAction(action){
  if(action==='storm')startStorm();
  if(action==='meet'&&S.flags.storm){S.flags.metFriends=true;S.stage=6;S.storyStep=6;unlock('kurapika');unlock('leorio');S.stats.bond+=1;addLog('你與雷歐力、酷拉皮卡互相認識。')}
  if(action==='captain'&&S.flags.metFriends){S.flags.captain=true;S.stage=7;S.storyStep=7;addLog('船長開始詢問三人的真正動機。')}
- if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。v0.3 目前主線完成。');toast('目前主線完成！')}
+ if(action==='answer'&&S.flags.captain){S.stage=8;S.storyStep=8;S.scene='port';S.flags.complete=true;S.jenny+=120;gainExp(35);S.inventory.route=1;addLog('船長認可你的回答，提供通往獵人試驗的線索。');toast('取得：試驗路線線索')}
+ if(action==='dolle'&&S.flags.complete&&!S.flags.dolle){S.flags.dolle=true;S.stage=9;S.storyStep=9;S.scene='dolle';gainExp(10);addLog('船抵多雷港。三人沒有跟著大批考生走，而是記住船長指向的一本杉。');toast('抵達多雷港')}
+ if(action==='quizroad'&&S.flags.dolle&&!S.flags.quiz){S.stage=10;S.storyStep=10;S.scene='quiz';addLog('通往一本杉的安全路線被老婆婆與蒙面人攔下。二選一問答開始。')}
+ if((action==='quiz1'||action==='quiz2')&&!S.flags.quiz){S.energy=Math.max(10,S.energy-5);addLog('你試著從兩個選項中挑一個，但這題本身沒有唯一正解。');toast('這不是正確解法')}
+ if(action==='quizsilence'&&!S.flags.quiz){S.flags.quiz=true;S.stage=11;S.storyStep=11;S.scene='pine';S.stats.will+=.3;gainExp(20);unlock('quizlady');addLog('五秒結束，三人保持沉默。老婆婆認可答案並打開安全通道。');toast('正解：沉默')}
+ if(action==='kiriko'&&S.flags.quiz&&!S.flags.kiriko){startKiriko()}
+ if(action==='examhall'&&S.flags.kiriko&&!S.flags.examHall){S.flags.examHall=true;S.stage=14;S.storyStep=14;S.scene='exam';S.inventory.preexamPass=1;S.jenny+=180;gainExp(40);addLog('凶狸狐一家帶著三人抵達秘密試驗入口。287 期獵人試驗就在門後。');toast('v0.4 主線完成！')}
  save();render();
 }
 
@@ -352,7 +398,11 @@ function questData(){
   {name:'釣起沼澤之王',done:S.flags.master,desc:S.flags.master?'已完成':'完成鯨魚島的約定'},
   {name:'向米特道別',done:S.flags.mito,desc:S.flags.mito?'已完成':'取得離島許可'},
   {name:'撐過船上風暴',done:S.flags.storm,desc:S.flags.storm?'已完成':'在前往試驗的船上證明自己'},
-  {name:'回答船長',done:S.flags.complete,desc:S.flags.complete?'初版完成':'說出成為獵人的真正理由'}
+  {name:'回答船長',done:S.flags.complete,desc:S.flags.complete?'已完成':'說出成為獵人的真正理由'},
+  {name:'抵達多雷港',done:S.flags.dolle,desc:S.flags.dolle?'已完成':'跟隨船長指示前往一本杉'},
+  {name:'通過二選一問答',done:S.flags.quiz,desc:S.flags.quiz?'沉默通過':'找出沒有唯一答案的陷阱'},
+  {name:'通過凶狸狐試煉',done:S.flags.kiriko,desc:S.flags.kiriko?'導航員認可':'辨識魔獸交換身分的破綻'},
+  {name:'抵達獵人試驗會場',done:S.flags.examHall,desc:S.flags.examHall?'v0.4 主線完成':'接受導航前往秘密入口'}
  ];
 }
 
@@ -371,8 +421,12 @@ function currentObjective(){
  if(!S.flags.storm)return {title:'撐過海上風暴',desc:'維持體力並承受甲板上的風浪，完成前往試驗的第一個考驗。',action:'按下「迎戰風暴」'};
  if(!S.flags.metFriends)return {title:'與同船考生相識',desc:'風暴結束後，認識雷歐力與酷拉皮卡。',action:'按下「和另外兩人交談」'};
  if(!S.flags.captain)return {title:'接受船長的試探',desc:'船長正在觀察三人是否真正具備獵人的心志。',action:'按下「注意船長的試探」'};
- if(!S.flags.complete)return {title:'說出成為獵人的理由',desc:'通過船長的提問，取得前往真正試驗會場的線索。',action:'按下船長回答選項'};
- return {title:'等待下一章更新',desc:'目前主線已完成到試驗之路前，下一版將進入多雷港與獵人試驗前置。',action:'持續放置累積資源'};
+ if(!S.flags.complete)return {title:'說出成為獵人的理由',desc:'通過船長的提問，取得前往真正試驗會場的線索。',action:'回答船長'};
+ if(!S.flags.dolle)return {title:'前往多雷港',desc:'沿船長留下的線索踏上試驗前置路線。',action:'按下「抵達多雷港」'};
+ if(!S.flags.quiz)return {title:'通過二選一問答',desc:'題目看似只能二選一，但真正要判斷的是「這題是否存在正確答案」。',action:'在測驗中做出判斷'};
+ if(!S.flags.kiriko)return {title:'通過凶狸狐導航員試煉',desc:'利用小傑的感知追蹤魔獸，辨識牠們交換身分的破綻。',action:'進入一本杉下的小屋'};
+ if(!S.flags.examHall)return {title:'前往秘密試驗會場',desc:'凶狸狐已認可三人，接受導航即可抵達真正的考場。',action:'接受導航'};
+ return {title:'287 期獵人試驗即將開始',desc:'試驗前置已完成。下一版將進入第一階段長跑並正式加入奇犽。',action:'持續放置累積資源'};
 }
 
 function renderCurrentActivity(){const a=activityDef(),elapsed=clamp(S.activityProgress||0,0,a.duration),remain=a.duration-elapsed,pct=elapsed/a.duration*100;document.getElementById('currentActivityName').textContent=`${a.icon} ${a.name}`;document.getElementById('currentActivityMeta').textContent=`${a.duration} 秒一輪 · 完成後一次結算`;document.getElementById('currentActivityTimer').textContent=clockText(remain);document.getElementById('currentActivityBar').style.width=pct+'%';document.getElementById('currentActivityReward').textContent=rewardLabel(cycleRewards(a.id));document.getElementById('currentActivityHourly').textContent=hourlyLabel(a.id);document.getElementById('offlineForecast').textContent=offline72Label(a.id)}
@@ -386,34 +440,47 @@ function renderDialogue(){const d=getDialogue();document.getElementById('speaker
  if(S.stage===5&&S.flags.storm&&!S.flags.metFriends)buttons.push(['meet','和另外兩人交談','primary']);
  if(S.stage===6&&S.flags.metFriends&&!S.flags.captain)buttons.push(['captain','注意船長的試探','primary']);
  if(S.stage===7&&S.flags.captain&&!S.flags.complete)buttons.push(['answer','「我要找到金，也想知道獵人究竟是什麼。」','gold']);
+ if(S.stage===8&&S.flags.complete&&!S.flags.dolle)buttons.push(['dolle','抵達多雷港','gold']);
+ if(S.stage===9&&S.flags.dolle&&!S.flags.quiz)buttons.push(['quizroad','照船長提示前往一本杉方向','primary']);
+ if(S.stage===10&&!S.flags.quiz){
+   document.getElementById('choices').innerHTML=`<div class="quiz-panel" style="width:100%"><b>五秒問答：只能選 1 或 2，你會怎麼做？</b><small>這不是知識題，而是對判斷力的測試。</small><div class="quiz-options"><button class="btn" data-story="quiz1">① 選第一個人</button><button class="btn" data-story="quiz2">② 選第二個人</button><button class="btn gold" data-story="quizsilence">保持沉默</button></div></div>`;
+   document.querySelectorAll('[data-story]').forEach(b=>b.onclick=()=>storyAction(b.dataset.story));return;
+ }
+ if(S.stage===11&&S.flags.quiz&&!S.flags.kiriko)buttons.push(['kiriko','前往一本杉下的小屋','gold']);
+ if(S.stage===13&&S.flags.kiriko&&!S.flags.examHall)buttons.push(['examhall','接受導航，前往試驗會場','gold']);
  if(S.stage<2)buttons.push(['hint',S.res.training<12?'繼續放置修行':'切換採集餌料','']);
  document.getElementById('choices').innerHTML=buttons.map(([a,t,c])=>`<button class="btn ${c}" data-story="${a}">${t}</button>`).join('');document.querySelectorAll('[data-story]').forEach(b=>b.onclick=()=>b.dataset.story==='hint'?toast(S.res.training<12?'選擇「森林修行」累積訓練。':'選擇「採集餌料」準備上鉤。'):storyAction(b.dataset.story));
 }
-function renderBoss(){const el=document.getElementById('bossArea');if(!S.boss){el.innerHTML='';return}const b=S.boss;const name=b.type==='master'?'沼澤之王・拉鋸戰':'風暴・甲板生存';const pct=clamp(100-b.hp/b.max*100,0,100);el.innerHTML=`<div class="boss"><div class="boss-head"><b>${name}</b><span>${Math.max(0,Math.ceil(b.hp))}/${b.max}</span></div><div class="bar"><div class="fill red" style="width:${100-pct}%"></div></div><div style="font-size:12px;color:#d9bcb7;margin-top:6px">自動進行中 · 專注 ${b.focus.toFixed(1)}</div><div class="skills"><button class="btn" data-skill="burst">${b.type==='master'?'猛拉魚竿':'固定繩索'} (-9 體力)</button><button class="btn" data-skill="observe">觀察節奏</button><button class="btn" data-skill="steady">穩住呼吸 (+體力)</button></div></div>`;document.querySelectorAll('[data-skill]').forEach(x=>x.onclick=()=>skill(x.dataset.skill))}
-function renderInventory(){const items=[];if(S.inventory.rod)items.push(['🎣','小傑的釣竿','從鯨魚島一路帶在身邊的工具。','×1']);if(S.res.bait>=.1)items.push(['🪱','餌料','在森林與岸邊採集。',`×${Math.floor(S.res.bait)}`]);if(S.res.herb>=.1)items.push(['🌿','島上草藥','可在後續版本製作恢復道具。',`×${Math.floor(S.res.herb)}`]);if(S.res.fish>=.1)items.push(['🐟','魚獲','可換取少量戒尼。',`×${Math.floor(S.res.fish)}`]);if(S.inventory.scale)items.push(['🐉','沼澤之王的鱗片','紀念性道具，代表你完成與米特的約定。','×1']);if(S.inventory.lunch)items.push(['🍱','米特的便當','離島前準備的便當。','×1']);if(S.inventory.route)items.push(['🧭','試驗會場線索','船長認可後提供的路線提示。','×1']);document.getElementById('inventory').innerHTML=items.map(i=>`<div class="item"><div class="icon">${i[0]}</div><div style="flex:1"><b>${i[1]}</b><small>${i[2]}</small></div><b>${i[3]}</b></div>`).join('')||'<small>背包目前是空的。</small>'}
+function renderBoss(){const el=document.getElementById('bossArea');if(!S.boss){el.innerHTML='';return}const b=S.boss;const name=b.type==='master'?'沼澤之王・拉鋸戰':b.type==='kiriko'?'凶狸狐・辨識試煉':'風暴・甲板生存';const pct=clamp(100-b.hp/b.max*100,0,100);el.innerHTML=`<div class="boss"><div class="boss-head"><b>${name}</b><span>${Math.max(0,Math.ceil(b.hp))}/${b.max}</span></div><div class="bar"><div class="fill red" style="width:${100-pct}%"></div></div><div style="font-size:12px;color:#d9bcb7;margin-top:6px">自動進行中 · 專注 ${b.focus.toFixed(1)}</div><div class="skills"><button class="btn" data-skill="burst">${b.type==='master'?'猛拉魚竿':b.type==='kiriko'?'加速追蹤':'固定繩索'} (-9 體力)</button><button class="btn" data-skill="observe">${b.type==='kiriko'?'觀察破綻':'觀察節奏'}</button><button class="btn" data-skill="steady">穩住呼吸 (+體力)</button></div></div>`;document.querySelectorAll('[data-skill]').forEach(x=>x.onclick=()=>skill(x.dataset.skill))}
+function renderInventory(){const items=[];if(S.inventory.rod)items.push(['🎣','小傑的釣竿','從鯨魚島一路帶在身邊的工具。','×1']);if(S.res.bait>=.1)items.push(['🪱','餌料','在森林與岸邊採集。',`×${Math.floor(S.res.bait)}`]);if(S.res.herb>=.1)items.push(['🌿','島上草藥','可在後續版本製作恢復道具。',`×${Math.floor(S.res.herb)}`]);if(S.res.fish>=.1)items.push(['🐟','魚獲','可換取少量戒尼。',`×${Math.floor(S.res.fish)}`]);if(S.inventory.scale)items.push(['🐉','沼澤之王的鱗片','紀念性道具，代表你完成與米特的約定。','×1']);if(S.inventory.lunch)items.push(['🍱','米特的便當','離島前準備的便當。','×1']);if(S.inventory.route)items.push(['🧭','試驗會場線索','船長認可後提供的路線提示。','×1']);if(S.inventory.preexamPass)items.push(['🦊','導航員認可','通過凶狸狐一家試煉後取得的試驗前置資格。','×1']);document.getElementById('inventory').innerHTML=items.map(i=>`<div class="item"><div class="icon">${i[0]}</div><div style="flex:1"><b>${i[1]}</b><small>${i[2]}</small></div><b>${i[3]}</b></div>`).join('')||'<small>背包目前是空的。</small>'}
 function renderCodex(){const data=[
  ['gon','小傑・富力士','鯨魚島長大的少年。目標是成為獵人並找到父親金。'],
  ['mito','米特','撫養小傑長大的家人。嘴上嚴格，但十分在乎小傑。'],
  ['kite','凱特','曾在鯨魚島讓小傑知道金仍然活著，也讓「獵人」成為具體目標。'],
  ['leorio','雷歐力','在前往獵人試驗的船上相遇。直率、好強，有自己的現實目標。'],
- ['kurapika','酷拉皮卡','同船的試驗參加者。冷靜、知識豐富，背負著自己的目的。']
+ ['kurapika','酷拉皮卡','同船的試驗參加者。冷靜、知識豐富，背負著自己的目的。'],
+ ['quizlady','試驗前置・老婆婆','在多雷港附近把守安全路線，以沒有唯一答案的二選一問題測試考生。'],
+ ['kiriko','凶狸狐一家','能變化成人形的魔獸，也是獵人試驗會場的導航員。']
  ];document.getElementById('codex').innerHTML=data.map(x=>{const on=S.unlocked.includes(x[0]);return `<div class="codex-entry ${on?'':'locked'}"><b>${on?x[1]:'？？？'}</b><br><small>${on?x[2]:'隨主線推進解鎖'}</small></div>`}).join('')}
 function renderTimeline(){const rows=[
  ['✓','鯨魚島：沼澤之王','漫畫第 1 話 / 2011 動畫第 1 集',S.flags.master],
  ['→','離開鯨魚島','漫畫第 1 話',S.flags.depart],
  ['→','船上風暴與相遇','漫畫第 2 話 / 2011 動畫第 1 集',S.flags.metFriends],
  ['→','船長的初步試探','漫畫第 2 話',S.flags.complete],
- ['○','多雷港後的試驗路線','漫畫第 3–4 話',false],
- ['○','287 期獵人試驗','漫畫第 5 話起',false]
- ];document.getElementById('timeline').innerHTML=rows.map(r=>`<div class="item"><div class="icon">${r[3]?'✓':r[0]}</div><div><b>${r[1]}</b><small>${r[2]}${r[3]?' · 已完成':''}</small></div></div>`).join('')+'<small style="display:block;margin-top:10px;color:#819d90">初版以漫畫事件順序為主；年份精確日期在不同資料整理中存在差異，因此遊戲內先不鎖定到單一日。</small>'}
+ ['→','多雷港與二選一問答','漫畫第 3 話 / 2011 動畫第 2 集',S.flags.quiz],
+ ['→','一本杉與凶狸狐導航員','漫畫第 4 話 / 2011 動畫第 2 集',S.flags.kiriko],
+ ['→','秘密試驗會場入口','漫畫第 4→5 話',S.flags.examHall],
+ ['○','287 期獵人試驗・第一階段','漫畫第 5 話起',false]
+ ];document.getElementById('timeline').innerHTML=rows.map(r=>`<div class="item"><div class="icon">${r[3]?'✓':r[0]}</div><div><b>${r[1]}</b><small>${r[2]}${r[3]?' · 已完成':''}</small></div></div>`).join('')+'<small style="display:block;margin-top:10px;color:#819d90">遊戲事件順序以漫畫為主，2011 動畫作對照；對話為遊戲重新撰寫。</small>'}
 function renderLogs(){document.getElementById('log').innerHTML=S.logs.map(l=>`<div class="log-row"><time>${l.t}</time>${l.msg}</div>`).join('')||'<div class="log-row">旅程才剛開始。</div>'}
-function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.complete?`<div class="complete"><b>v0.3「離島之日」完成</b><div style="margin-top:5px;color:#d9decf">下一階段：多雷港 → 二選一問答 → 凶狸狐一家 → 試驗會場。v0.2 先完成放置面板與計時系統重製，存檔可直接沿用。</div></div>`:''}
+function renderComplete(){const el=document.getElementById('completeArea');el.innerHTML=S.flags.examHall?`<div class="complete"><b>v0.4「試驗前哨」完成</b><div style="margin-top:5px;color:#d9decf">已完成：多雷港 → 二選一問答 → 一本杉 → 凶狸狐導航員 → 秘密試驗會場。下一階段將正式進入第一階段長跑，並加入奇犽。</div></div>`:''}
 function renderStats(){const need=expNeed(),remain=Math.max(0,need-S.exp),scene=(SCENES[S.scene]||SCENES.whale);
  const trainHour=cycleRewards('train',3600/activityDef('train').duration).exp||0;
  const eta=trainHour>0 ? (remain<=0 ? '可升級' : formatDuration(remain/trainHour*3600)) : '—';
- const mainText=(currentObjective().title||'鯨魚島的約定');document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=scene.name.split('・')[0];document.getElementById('hudStage').textContent=scene.name;document.getElementById('playTimeText').textContent=formatDuration(S.playSeconds);document.getElementById('nextLevelEta').textContent=eta;document.getElementById('mainQuestText').textContent=mainText;document.getElementById('expSources').innerHTML=`<b>固定 EXP：</b>森林修行每 30 秒 +1.35 EXP（每小時約 +162）<br><b>劇情 EXP：</b>沼澤之王 +28｜米特 +12｜風暴 +25｜船長回答 +35<br><span style="color:#8fa99b">採集與一般釣魚不提供 EXP；離線收益以目前活動的 55% 效率計算。</span>`}
+ const mainText=(currentObjective().title||'鯨魚島的約定');document.getElementById('levelText').textContent=`Lv.${S.level}`;document.getElementById('expDetail').textContent=`${S.exp.toFixed(1)} / ${need} EXP（還差 ${remain.toFixed(1)}）`;document.getElementById('jennyText').textContent=fmt(S.jenny);document.getElementById('energyText').textContent=`${Math.floor(S.energy)}/${S.maxEnergy}`;document.getElementById('senseText').textContent=(S.stats.sense+S.res.training/30).toFixed(1);document.getElementById('bodyText').textContent=S.stats.body.toFixed(1);document.getElementById('willText').textContent=S.stats.will.toFixed(1);document.getElementById('fishText').textContent=S.stats.fish.toFixed(1);document.getElementById('bondText').textContent=S.stats.bond.toFixed(0);document.getElementById('energyBar').style.width=(S.energy/S.maxEnergy*100)+'%';document.getElementById('expBar').style.width=(S.exp/need*100)+'%';document.getElementById('stageChip').textContent=scene.name.split('・')[0];document.getElementById('hudStage').textContent=scene.name;document.getElementById('playTimeText').textContent=formatDuration(S.playSeconds);document.getElementById('nextLevelEta').textContent=eta;document.getElementById('mainQuestText').textContent=mainText;document.getElementById('expSources').innerHTML=`<b>固定 EXP：</b>森林修行每 30 秒 +1.35 EXP（每小時約 +162）<br><b>劇情 EXP：</b>沼澤之王 +28｜米特 +12｜風暴 +25｜船長 +35｜問答 +20｜凶狸狐 +32｜會場 +40<br><span style="color:#8fa99b">採集與一般釣魚不提供 EXP；離線收益以目前活動的 55% 效率計算。</span>`}
+function renderChapterTrack(){const idx=S.stage<=3?0:S.stage<=8?1:S.stage<=13?2:3;const ids=['chapter-whale','chapter-ship','chapter-preexam','chapter-exam'];ids.forEach((id,i)=>{const el=document.getElementById(id);el.classList.toggle('done',i<idx);el.classList.toggle('active',i===idx)});document.querySelectorAll('.chapter-line').forEach((el,i)=>el.classList.toggle('done',i<idx))}
 function renderObjective(){const o=currentObjective();document.getElementById('objectiveTitle').textContent=o.title;document.getElementById('objectiveDesc').textContent=o.desc;document.getElementById('objectiveAction').textContent=o.action}
-function render(){renderStats();renderCurrentActivity();renderObjective();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
+function render(){renderStats();renderCurrentActivity();renderObjective();renderChapterTrack();document.getElementById('sceneArt').innerHTML=sceneHTML();renderActivities();renderQuests();renderDialogue();renderBoss();renderInventory();renderCodex();renderTimeline();renderLogs();renderComplete()}
 
 // tabs
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.tab-pane').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t.dataset.tab).classList.add('active')});
